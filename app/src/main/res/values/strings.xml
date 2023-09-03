@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">ProjetoFinal</string>
+    <string name="botao_cadastrar">Cadastrar Produtos</string>
+    <string name="botao_listar">Listar Produtos</string>
+    <string name="botao_orcamento">Fazer Orçamento</string>
+    <string name="botao_consultar">Consultar Orçamentos</string>
+    <string name="botao_codigo_barras">Ler Código de Barras</string>
+    <string name="botao_salvar">Salvar</string>
+    <string name="botao_limpar">Limpar</string>
+    <string name="title_new_product">Cadastrar Novo Produto</string>
+    <string name="title_new_orc">Cadastrar Novo Orçamento</string>
+    <string name="input_digitar_codigo">Digitar Código de Barras</string>
+    <string name="input_cpf_cnpj">CPF/CNPJ</string>
+    <string name="input_empenho">Empenho</string>
+    <string name="text_opcional">*Opcional</string>
+
+</resources>
