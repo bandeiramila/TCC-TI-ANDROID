@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/title"
@@ -14,55 +12,27 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:gravity="center_horizontal|center_vertical"
-        android:text="@string/title_new_product"
-        android:textSize="30sp"
+        android:text="@string/title_new_budget"
+        android:textSize="29sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <Button
-        android:id="@+id/button_read_barcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:text="@string/botao_codigo_barras"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/input_nome_produto"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintVertical_chainStyle="packed" />
-
     <Spinner
-        android:id="@+id/input_nome_produto"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@id/input_tipo_produto"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_read_barcode" />
-
-    <Spinner
-        android:id="@+id/input_tipo_produto"
+        android:id="@+id/input_nome_cliente"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@id/input_digitar_codigo"
+        app:layout_constraintBottom_toTopOf="@id/input_digitar_cpf_cnpj"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_nome_produto" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <EditText
-        android:id="@+id/input_digitar_codigo"
+        android:id="@+id/input_digitar_cpf_cnpj"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -70,21 +40,26 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="text"
-        android:hint="@string/input_digitar_codigo"
+        android:hint="@string/input_cpf_cnpj"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_tipo_produto" />
+        app:layout_constraintTop_toBottomOf="@+id/input_nome_cliente" />
 
-    <TextView
-        android:id="@+id/text_opcional"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <EditText
+        android:id="@+id/input_digitar_empenho"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/text_opcional"
-        android:textColor="@color/red"
-        app:layout_constraintBottom_toTopOf="@+id/input_digitar_codigo"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/input_empenho"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_digitar_cpf_cnpj" />
 
     <Button
         android:id="@+id/botao_limpar"
@@ -96,7 +71,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@id/botao_salvar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_digitar_codigo" />
+        app:layout_constraintTop_toBottomOf="@+id/input_digitar_empenho" />
 
     <Button
         android:id="@+id/botao_salvar"
@@ -107,9 +82,12 @@
         android:layout_marginEnd="16dp"
         android:text="@string/botao_salvar"
         android:textSize="16sp"
+        android:onClick="fazerOrcamentoSalvar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/botao_limpar"
-        app:layout_constraintTop_toBottomOf="@+id/input_digitar_codigo" />
+        app:layout_constraintTop_toBottomOf="@+id/input_digitar_empenho" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
