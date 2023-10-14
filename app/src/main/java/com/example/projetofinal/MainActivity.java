@@ -23,4 +23,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NewBudgetActivity.class);
         startActivity(intent);
     }
+
+    public void listarProdutos(View view){
+        Intent intent = new Intent(this, ProductsListActivity.class);
+        startActivity(intent);
+    }
 }
