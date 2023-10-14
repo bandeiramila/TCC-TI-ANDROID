@@ -24,7 +24,7 @@ import java.util.List;
 public class ProductsListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<Products> products;
-    private static String JSON_URL = "http://192.168.1.15/mvc_sistema_livraria/view/listaprodutos.php?nome";
+    private static String JSON_URL = "http://192.168.1.18/mvc_sistema_livraria/view/listaprodutos.php?nome";
     Adapter adapter;
 
 

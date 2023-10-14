@@ -34,9 +34,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.nameProd.setText(products.get(position).getProductName());
-        holder.quantProd.setText(products.get(position).getQuant());
-        holder.priceProd.setText((int) products.get(position).getPrice());
+        String name = products.get(position).getProductName();
+        String quant = products.get(position).getQuant();
+        String price = String.format("R$ %1$.2f", products.get(position).getPrice());
+
+        holder.nameProd.setText(name);
+        holder.quantProd.setText(quant);
+        holder.priceProd.setText(price);
     }
 
     @Override
