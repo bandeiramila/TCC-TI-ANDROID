@@ -81,13 +81,14 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
         recyclerView.setAdapter(adapter);
     }
 
-    public void showAlertDialog() {
-        PopUpItem dialogFragment = new PopUpItem();
+    public void showAlertDialog(Products produto) {
+        PopUpItem dialogFragment = PopUpItem.newInstance(produto);
+        getSupportFragmentManager().beginTransaction().commit();
         dialogFragment.show(getSupportFragmentManager(), "PopUpItem");
     }
 
     @Override
-    public void onItemClick(int position) {
-        showAlertDialog();
+    public void onItemClick(Products produto) {
+        showAlertDialog(produto);
     }
 }

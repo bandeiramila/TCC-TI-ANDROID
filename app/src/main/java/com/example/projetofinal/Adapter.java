@@ -24,6 +24,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         this.products = products;
     }
 
+    //observador da interface
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.clickListener = listener;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView quantProd, nameProd, priceProd;
         CardView productLineCardView;
@@ -46,21 +51,20 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder layout, int position) {
         Products produto = products.get(position);
         String name = produto.getProductName();
         String quant = produto.getQuant();
         String price = String.format("R$ %1$.2f", produto.getPrice());
-        int id = products.get(position).getId();
 
-        holder.nameProd.setText(name);
-        holder.quantProd.setText(quant);
-        holder.priceProd.setText(price);
+        layout.nameProd.setText(name);
+        layout.quantProd.setText(quant);
+        layout.priceProd.setText(price);
 
-        holder.productLineCardView.setOnClickListener(new View.OnClickListener() {
+        layout.productLineCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickListener.onItemClick(holder.getAdapterPosition());
+                clickListener.onItemClick(produto);
 
             }
         });
@@ -71,11 +75,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         return products.size();
     }
 
+    //define as funções que a activity precisa ter
     public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.clickListener = listener;
+        void onItemClick(Products produto);
     }
 }
