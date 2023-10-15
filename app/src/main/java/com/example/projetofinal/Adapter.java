@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
@@ -24,7 +26,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         this.products = products;
     }
 
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        TextView quantProd, nameProd, priceProd;
+        CardView productLineCardView;
 
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            quantProd = itemView.findViewById(R.id.quantProd);
+            nameProd = itemView.findViewById(R.id.nameProd);
+            priceProd = itemView.findViewById(R.id.priceProd);
+            productLineCardView = itemView.findViewById(R.id.productLineCardView);
+        }
+    }
 
     @NonNull
     @Override
@@ -44,6 +58,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.nameProd.setText(name);
         holder.quantProd.setText(quant);
         holder.priceProd.setText(price);
+
+        holder.productLineCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(inflater.getContext(), String.valueOf(produto.getId()),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -51,21 +72,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         return products.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView quantProd, nameProd, priceProd;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            quantProd = itemView.findViewById(R.id.quantProd);
-            nameProd = itemView.findViewById(R.id.nameProd);
-            priceProd = itemView.findViewById(R.id.priceProd);
-        }
-    }
-
-    public void abrirProduto(View view){
-        String text = "oi";
-    }
 
 
 }
