@@ -1,6 +1,8 @@
 package com.example.projetofinal;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +68,37 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             }
         });
     }
+
+//    private void showAlertDialog(){
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
+//        builder.setTitle("Produto");
+//        builder.setMessage("Nome do produto");   //produto.getProductName());
+//        builder.setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                Toast.makeText(inflater.getContext(), "Editar",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        builder.setNeutralButton("Excluir", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                Toast.makeText(inflater.getContext(), "Excluir",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                Toast.makeText(inflater.getContext(), "Cancelar",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        AlertDialog alert = builder.create();
+//        alert.show();
+//    }
+
 
     @Override
     public int getItemCount() {
