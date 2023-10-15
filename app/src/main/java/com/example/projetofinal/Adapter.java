@@ -1,6 +1,7 @@
 package com.example.projetofinal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,9 +35,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String name = products.get(position).getProductName();
-        String quant = products.get(position).getQuant();
-        String price = String.format("R$ %1$.2f", products.get(position).getPrice());
+        Products produto = products.get(position);
+        String name = produto.getProductName();
+        String quant = produto.getQuant();
+        String price = String.format("R$ %1$.2f", produto.getPrice());
+        int id = products.get(position).getId();
 
         holder.nameProd.setText(name);
         holder.quantProd.setText(quant);
@@ -58,6 +61,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             nameProd = itemView.findViewById(R.id.nameProd);
             priceProd = itemView.findViewById(R.id.priceProd);
         }
+    }
+
+    public void abrirProduto(View view){
+        String text = "oi";
     }
 
 
