@@ -1,20 +1,14 @@
 package com.example.projetofinal;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -22,13 +16,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     LayoutInflater inflater;
     List<Products> products;
+    private OnItemClickListener clickListener;
+
 
     public Adapter(Context ctx, List<Products> products) {
         this.inflater = LayoutInflater.from(ctx);
         this.products = products;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView quantProd, nameProd, priceProd;
         CardView productLineCardView;
 
@@ -45,7 +41,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.custom_list_layout,parent,false);
+        View view = inflater.inflate(R.layout.custom_list_layout, parent, false);
         return new ViewHolder(view);
     }
 
@@ -64,47 +60,22 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.productLineCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(inflater.getContext(), String.valueOf(produto.getId()),Toast.LENGTH_SHORT).show();
+                clickListener.onItemClick(holder.getAdapterPosition());
+
             }
         });
     }
-
-//    private void showAlertDialog(){
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
-//        builder.setTitle("Produto");
-//        builder.setMessage("Nome do produto");   //produto.getProductName());
-//        builder.setPositiveButton("Editar", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//                Toast.makeText(inflater.getContext(), "Editar",Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        builder.setNeutralButton("Excluir", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//                Toast.makeText(inflater.getContext(), "Excluir",Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//                Toast.makeText(inflater.getContext(), "Cancelar",Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        AlertDialog alert = builder.create();
-//        alert.show();
-//    }
-
 
     @Override
     public int getItemCount() {
         return products.size();
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
 
-
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.clickListener = listener;
+    }
 }

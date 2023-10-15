@@ -21,7 +21,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsListActivity extends AppCompatActivity {
+public class ProductsListActivity extends AppCompatActivity implements Adapter.OnItemClickListener {
     RecyclerView recyclerView;
     List<Products> products;
     private static String JSON_URL = "http://192.168.1.18/mvc_sistema_livraria/view/listaprodutos.php?nome";
@@ -38,7 +38,7 @@ public class ProductsListActivity extends AppCompatActivity {
 
     }
 
-    private void extractProducts(){
+    private void extractProducts() {
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONArray>() {
             @Override
@@ -61,9 +61,8 @@ public class ProductsListActivity extends AppCompatActivity {
                     }
                 }
 
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                adapter = new Adapter(getApplicationContext(), products);
-                recyclerView.setAdapter(adapter);
+                showList(products);
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -73,5 +72,22 @@ public class ProductsListActivity extends AppCompatActivity {
         });
 
         queue.add(jsonArrayRequest);
+    }
+
+    private void showList(List<Products> products) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        adapter = new Adapter(getApplicationContext(), products);
+        adapter.setOnItemClickListener(this);
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void showAlertDialog() {
+        PopUpItem dialogFragment = new PopUpItem();
+        dialogFragment.show(getSupportFragmentManager(), "PopUpItem");
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        showAlertDialog();
     }
 }
