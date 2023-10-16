@@ -11,6 +11,7 @@
     <string name="botao_organizar">Organizar por</string>
     <string name="botao_filtrar">Filtrar</string>
     <string name="botao_pesquisar">Pesquisar</string>
+    <string name="botao_editar">Editar</string>
     <string name="title_new_product">Cadastrar Novo Produto</string>
     <string name="title_new_budget">Cadastrar Novo Orçamento</string>
     <string name="title_products_list">Lista de Produtos</string>
@@ -24,6 +25,7 @@
     <string name="text_cpf_cnpj">CPF/CNPJ: </string>
     <string name="text_total_cost">Valor Total: </string>
     <string name="text_itens_list">Lista de Ítens</string>
+    <string name="text_item">ítem: </string>
     <string name="receive_client">Nome cliente</string>
     <string name="receive_cpf_cnpj">Cadastro cliente</string>
     <string name="receive_total_cost">R$ 00,00</string>

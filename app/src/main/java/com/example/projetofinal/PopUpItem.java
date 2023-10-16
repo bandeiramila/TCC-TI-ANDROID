@@ -52,7 +52,8 @@ public class PopUpItem extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView titulo = view.findViewById(R.id.itemNome);
+        String texto = "ítem: " + product.getProductName();
 
-        titulo.setText(product.getProductName());
+        titulo.setText(texto);
     }
 }
