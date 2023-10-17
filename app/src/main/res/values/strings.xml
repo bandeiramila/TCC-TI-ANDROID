@@ -12,6 +12,8 @@
     <string name="botao_filtrar">Filtrar</string>
     <string name="botao_pesquisar">Pesquisar</string>
     <string name="botao_editar">Editar</string>
+    <string name="botao_excluir">Excluir</string>
+    <string name="botao_cancelar">Cancelar</string>
     <string name="title_new_product">Cadastrar Novo Produto</string>
     <string name="title_new_budget">Cadastrar Novo Orçamento</string>
     <string name="title_products_list">Lista de Produtos</string>

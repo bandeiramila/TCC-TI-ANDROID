@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="200dp"
-    android:layout_height="200dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".PopUpItem">
 
 
@@ -13,11 +15,12 @@
             android:layout_height="wrap_content"
             android:text="@string/text_item"
             android:textSize="16sp"
+            android:paddingBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/popup_botao_editar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.042"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf=""/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/popup_botao_editar"
@@ -27,18 +30,30 @@
             android:padding="0dp"
             android:text="@string/botao_editar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemNome" />
+            app:layout_constraintTop_toBottomOf="@id/itemNome"
+            app:layout_constraintEnd_toStartOf="@id/popup_botao_excluir"/>
 
         <Button
             android:id="@+id/popup_botao_excluir"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:padding="0dp"
-            android:text="@string/botao_editar"
-            app:layout_constraintTop_toBottomOf="@+id/itemNome" />
+            android:text="@string/botao_excluir"
+            android:layout_marginStart="4dp"
+            app:layout_constraintStart_toEndOf="@+id/popup_botao_editar"
+            app:layout_constraintTop_toBottomOf="@id/itemNome"
+            app:layout_constraintEnd_toStartOf="@id/popup_botao_cancelar"/>
 
-
-
+        <Button
+            android:id="@+id/popup_botao_cancelar"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:padding="0dp"
+            android:text="@string/botao_cancelar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/popup_botao_excluir"
+            app:layout_constraintTop_toBottomOf="@id/itemNome" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
