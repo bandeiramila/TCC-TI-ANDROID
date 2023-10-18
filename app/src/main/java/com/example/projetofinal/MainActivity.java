@@ -29,4 +29,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public double verificaVirgula(String valor){
+        
+    }
+
 }
