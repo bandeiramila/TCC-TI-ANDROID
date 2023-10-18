@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".PopUpEditItem">
+
+
+    <TextView
+        android:id="@+id/tituloPopUpEditar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_popup_editar"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/edita_item_nome_popup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_nome_produto"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tituloPopUpEditar" />
+
+    <EditText
+        android:id="@+id/input_nome_produto_popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/input_nome"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/edita_item_nome_popup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/edita_item_codigo_popup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_codigo_barras"
+        android:textSize="16sp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@id/input_nome_produto_popup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <EditText
+        android:id="@+id/input_digita_codigo_popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/input_bar_code"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/edita_item_codigo_popup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/edita_item_quantidade_popup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_quantidade"
+        android:textSize="16sp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@id/input_digita_codigo_popup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <EditText
+        android:id="@+id/input_digita_quantidade_popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:text=""
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edita_item_quantidade_popup" />
+
+    <TextView
+        android:id="@+id/edita_item_valor_popup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/input_valor"
+        android:textSize="16sp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@id/input_digita_quantidade_popup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/edita_item_valor_popup_rs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R$ "
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/edita_item_valor_popup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/input_digita_valor_popup"
+        app:layout_constraintBottom_toBottomOf="@id/input_digita_valor_popup"/>
+
+    <EditText
+        android:id="@+id/input_digita_valor_popup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="number|numberDecimal"
+        android:text="@string/input_valor_zerado"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/edita_item_valor_popup_rs"
+        app:layout_constraintTop_toBottomOf="@id/edita_item_valor_popup" />
+
+    <Button
+        android:id="@+id/popup_botao_enviar_popup"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:padding="0dp"
+        android:text="@string/botao_enviar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_digita_valor_popup"
+        app:layout_constraintEnd_toStartOf="@id/popup_botao_cancelar_popup"/>
+
+    <Button
+        android:id="@+id/popup_botao_cancelar_popup"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:padding="0dp"
+        android:text="@string/botao_cancelar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/popup_botao_enviar_popup"
+        app:layout_constraintTop_toBottomOf="@id/input_digita_valor_popup" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

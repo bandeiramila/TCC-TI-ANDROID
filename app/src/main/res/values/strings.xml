@@ -1,35 +1,48 @@
 <resources>
     <string name="app_name">ProjetoFinal</string>
+
     <string name="botao_cadastrar">Cadastrar Produtos</string>
+    <string name="botao_cancelar">Cancelar</string>
+    <string name="botao_codigo_barras">Ler Código de Barras</string>
+    <string name="botao_consultar">Consultar Orçamentos</string>
+    <string name="botao_editar">Editar</string>
+    <string name="botao_enviar">Enviar</string>
+    <string name="botao_excluir">Excluir</string>
+    <string name="botao_filtrar">Filtrar</string>
+    <string name="botao_inserir">Inserir ítem</string>
+    <string name="botao_limpar">Limpar</string>
     <string name="botao_listar">Listar Produtos</string>
     <string name="botao_orcamento">Fazer Orçamento</string>
-    <string name="botao_consultar">Consultar Orçamentos</string>
-    <string name="botao_codigo_barras">Ler Código de Barras</string>
-    <string name="botao_salvar">Salvar</string>
-    <string name="botao_limpar">Limpar</string>
-    <string name="botao_inserir">Inserir ítem</string>
     <string name="botao_organizar">Organizar por</string>
-    <string name="botao_filtrar">Filtrar</string>
     <string name="botao_pesquisar">Pesquisar</string>
-    <string name="botao_editar">Editar</string>
-    <string name="botao_excluir">Excluir</string>
-    <string name="botao_cancelar">Cancelar</string>
+    <string name="botao_salvar">Salvar</string>
+
     <string name="title_new_product">Cadastrar Novo Produto</string>
     <string name="title_new_budget">Cadastrar Novo Orçamento</string>
     <string name="title_products_list">Lista de Produtos</string>
-    <string name="input_digitar_codigo">Digitar Código de Barras</string>
+    <string name="title_popup_editar">EDIÇÃO DE ÍTEM</string>
+
     <string name="input_bar_code">Código de Barras</string>
     <string name="input_cpf_cnpj">CPF/CNPJ</string>
+    <string name="input_digitar_codigo">Digitar Código de Barras</string>
     <string name="input_empenho">Empenho</string>
+    <string name="input_nome">Nome</string>
     <string name="input_valor">Valor Unitário</string>
-    <string name="text_opcional">*Opcional</string>
+    <string name="input_valor_zerado">00,00</string>
+
     <string name="text_client">Cliente: </string>
+    <string name="text_codigo_barras">Código de Barras</string>
     <string name="text_cpf_cnpj">CPF/CNPJ: </string>
-    <string name="text_total_cost">Valor Total: </string>
-    <string name="text_itens_list">Lista de Ítens</string>
     <string name="text_item">ítem: </string>
+    <string name="text_itens_list">Lista de Ítens</string>
+    <string name="text_nome_produto">Nome do Produto</string>
+    <string name="text_opcional">*Opcional</string>
+    <string name="text_quantidade">Quantidade</string>
+    <string name="text_total_cost">Valor Total: </string>
+
     <string name="receive_client">Nome cliente</string>
     <string name="receive_cpf_cnpj">Cadastro cliente</string>
     <string name="receive_total_cost">R$ 00,00</string>
+
 
 </resources>
