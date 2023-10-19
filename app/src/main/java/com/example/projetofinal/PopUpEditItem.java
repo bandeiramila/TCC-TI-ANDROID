@@ -1,5 +1,6 @@
 package com.example.projetofinal;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PopUpEditItem extends DialogFragment {
     private static final String ITEM = "item";
@@ -79,10 +95,50 @@ public class PopUpEditItem extends DialogFragment {
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String novoNome = nome.getText().toString();
+                String novoCodigo = codigo.getText().toString();
+                int novaQuantidade = Integer.parseInt(quantidade.getText().toString());
+                double novoValor = Double.parseDouble(preco.getText().toString());
 
+                JSONObject jsonData = new JSONObject();
+                try {
+                    jsonData.put("id", product.getId());
+                    jsonData.put("nome_produto", novoNome);
+                    jsonData.put("codigo_de_barras", novoCodigo);
+                    jsonData.put("quantidade", novaQuantidade);
+                    jsonData.put("valor", novoValor);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                editarDados(getContext(), jsonData);
             }
         });
+
     }
 
+    private void editarDados(Context context, JSONObject jsonData){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/editaproduto.php";
 
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jsonData,
+                new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Toast.makeText(context, "Item editado com sucesso!", Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, "Erro ao editar item!", Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
+            }
+        );
+
+        queue.add(postRequest);
+
+
+    }
 }
