@@ -167,26 +167,4 @@ public class PopUpItem extends DialogFragment {
         }
     }
 
-    public void editarItem(Context context, JSONObject requestBody, String JSON_URL, int id, String nome, String codigo, int quantidade, double valor){
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        JsonObjectRequest postRequest = new JsonObjectRequest(
-                Request.Method.POST,
-                JSON_URL,
-                requestBody,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }
-        );
-        requestQueue.add(postRequest);
-    }
-
 }

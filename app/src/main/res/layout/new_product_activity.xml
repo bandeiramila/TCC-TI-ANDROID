@@ -35,18 +35,22 @@
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <Spinner
+    <EditText
         android:id="@+id/input_nome_novo_produto"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:autofillHints=""
+        android:hint="@string/text_nome_produto"
+        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@id/input_quantidade_novo_produto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_read_barcode" />
+        app:layout_constraintTop_toBottomOf="@+id/button_read_barcode"
+        />
 
     <EditText
         android:id="@+id/input_quantidade_novo_produto"
@@ -64,6 +68,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_nome_novo_produto" />
 
+    <TextView
+        android:id="@+id/text_opcional_quantidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/text_opcional"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toTopOf="@+id/input_quantidade_novo_produto"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <EditText
         android:id="@+id/input_preco_novo_produto"
         android:layout_width="0dp"
@@ -78,6 +92,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_quantidade_novo_produto" />
+
+    <TextView
+        android:id="@+id/text_opcional_valor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/text_opcional"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toTopOf="@+id/input_preco_novo_produto"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/input_digitar_codigo_novo_produto"
@@ -96,7 +120,7 @@
         android:autofillHints="" />
 
     <TextView
-        android:id="@+id/text_opcional"
+        android:id="@+id/text_opcional_codigo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
