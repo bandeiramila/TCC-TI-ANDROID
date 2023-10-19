@@ -23,14 +23,18 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
 
 import java.io.Serializable;
 
 public class PopUpItem extends DialogFragment {
     private static final String ITEM = "item";
     Products product;
+    private OnEditClickListener listener;
 
     public PopUpItem() {
 
@@ -38,7 +42,6 @@ public class PopUpItem extends DialogFragment {
     }
 
     public static PopUpItem newInstance(Products product) {
-
         PopUpItem fragment = new PopUpItem();
         Bundle args = new Bundle();
         args.putSerializable(ITEM, product);
@@ -53,6 +56,8 @@ public class PopUpItem extends DialogFragment {
         if (getArguments() != null) {
             product = (Products) args.getSerializable(ITEM);
         }
+        setCancelable(false);
+
     }
 
     @Override
@@ -78,6 +83,8 @@ public class PopUpItem extends DialogFragment {
             @Override
             public void onClick(View view) {
                 //EDITAR AQUI
+                dismiss();
+                listener.onEditClick(product);
             }
         });
 
@@ -144,6 +151,42 @@ public class PopUpItem extends DialogFragment {
             }
         });
         queue.add(stringRequest);
+    }
+
+    public interface OnEditClickListener {
+        void onEditClick(Products produto);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof OnEditClickListener){
+            listener = (OnEditClickListener) context;
+        } else {
+            throw new ClassCastException();
+        }
+    }
+
+    public void editarItem(Context context, JSONObject requestBody, String JSON_URL, int id, String nome, String codigo, int quantidade, double valor){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        JsonObjectRequest postRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                JSON_URL,
+                requestBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+        requestQueue.add(postRequest);
     }
 
 }

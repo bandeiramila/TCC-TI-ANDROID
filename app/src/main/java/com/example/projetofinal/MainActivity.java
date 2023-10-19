@@ -30,7 +30,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public double verificaVirgula(String valor){
-        
+        String valortratado = valor.replace(",", "").replaceAll("\\s", "");
+
+        try {
+            return Double.parseDouble(valortratado);
+        } catch (NumberFormatException e){
+            return 0.0;
+        }
     }
 
 }

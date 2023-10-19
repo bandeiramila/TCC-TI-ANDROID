@@ -21,7 +21,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsListActivity extends AppCompatActivity implements Adapter.OnItemClickListener {
+public class ProductsListActivity extends AppCompatActivity implements Adapter.OnItemClickListener, PopUpItem.OnEditClickListener {
     RecyclerView recyclerView;
     List<Products> products;
     private static String JSON_URL = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/listaprodutos.php?nome";
@@ -90,5 +90,19 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
     @Override
     public void onItemClick(Products produto) {
         showAlertDialog(produto);
+    }
+
+    /////////POP UP DE EDIÇÃO//////////
+
+    public void showAlertDialogEdit(Products produto) {
+        PopUpEditItem dialogFragment = PopUpEditItem.newInstance(produto);
+        getSupportFragmentManager().beginTransaction().commit();
+        dialogFragment.show(getSupportFragmentManager(), "PopUpEditItem");
+    }
+
+
+    @Override
+    public void onEditClick(Products produto) {
+        showAlertDialogEdit(produto);
     }
 }

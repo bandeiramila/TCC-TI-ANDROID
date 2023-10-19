@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context=".PopUpEditItem">
@@ -11,15 +11,16 @@
 
     <TextView
         android:id="@+id/tituloPopUpEditar"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
+
         android:text="@string/title_popup_editar"
+        android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/edita_item_nome_popup"
@@ -34,7 +35,7 @@
 
     <EditText
         android:id="@+id/input_nome_produto_popup"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/input_nome"
         android:textSize="14sp"
@@ -55,7 +56,7 @@
 
     <EditText
         android:id="@+id/input_digita_codigo_popup"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/input_bar_code"
         android:textSize="14sp"
@@ -76,7 +77,7 @@
 
     <EditText
         android:id="@+id/input_digita_quantidade_popup"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:text=""
@@ -111,9 +112,10 @@
         android:id="@+id/input_digita_valor_popup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:inputType="number|numberDecimal"
         android:text="@string/input_valor_zerado"
         android:textSize="14sp"
+        android:inputType="numberDecimal"
+        android:digits="1234567890.,"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/edita_item_valor_popup_rs"
         app:layout_constraintTop_toBottomOf="@id/edita_item_valor_popup" />
