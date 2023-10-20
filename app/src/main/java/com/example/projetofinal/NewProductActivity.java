@@ -6,20 +6,31 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class NewProductActivity extends AppCompatActivity {
 
@@ -72,7 +83,7 @@ public class NewProductActivity extends AppCompatActivity {
                 if (novoNome.isEmpty()){
                     inputNome.setError("O nome do produto é obrigatório.");
                 }else {
-                    cadastrarProduto(jsonData);
+                    cadastrarProduto(getApplicationContext(), jsonData);
                 }
             }
         });
@@ -88,20 +99,26 @@ public class NewProductActivity extends AppCompatActivity {
         });
     }
 
-    private void cadastrarProduto(JSONObject jsonData){
-        RequestQueue queue = Volley.newRequestQueue(NewProductActivity.this);
+    private void cadastrarProduto(Context context, JSONObject jsonData){
+        RequestQueue queue = Volley.newRequestQueue(context);
 
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, JSON_URL, jsonData, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(NewProductActivity.this, "Item cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Item cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(NewProductActivity.this, "Erro ao cadastrar ítem!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Erro ao cadastrar ítem!", Toast.LENGTH_SHORT).show();
             }
-        });
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";}
+
+
+        };
         queue.add(postRequest);
     }
 
