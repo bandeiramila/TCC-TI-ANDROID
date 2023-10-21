@@ -92,8 +92,7 @@ public class PopUpItem extends DialogFragment {
             @Override
             public void onClick(View view) {
                 //EXCLUIR AQUI, mas lógica fica na função
-                dismiss();
-                showDialogConfirm();
+                showDialogConfirm(product.getId(), product.getProductName());
             }
         });
 
@@ -106,9 +105,9 @@ public class PopUpItem extends DialogFragment {
         });
     }
 
-    private void showDialogConfirm() {
-        int id = product.getId();
-        String nome = product.getProductName();
+    private void showDialogConfirm(int id, String nome) {
+        //int id = product.getId();
+        //String nome = product.getProductName();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Confirmação");
@@ -117,7 +116,6 @@ public class PopUpItem extends DialogFragment {
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // Lógica para excluir o item aqui
-
                 excluirItem(getContext(), id);
                 dialog.dismiss();
             }
@@ -131,6 +129,8 @@ public class PopUpItem extends DialogFragment {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+
+
     }
 
     public void excluirItem(Context context, int id){

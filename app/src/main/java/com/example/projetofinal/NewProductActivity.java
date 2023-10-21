@@ -34,7 +34,6 @@ import java.util.Objects;
 
 public class NewProductActivity extends AppCompatActivity {
 
-    private static String JSON_URL = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/novoproduto.php";
     EditText inputNome, inputQuantidade, inputValor, inputCodigo;
     Button btnSalvar, btnLimpa;
 
@@ -101,8 +100,9 @@ public class NewProductActivity extends AppCompatActivity {
 
     private void cadastrarProduto(Context context, JSONObject jsonData){
         RequestQueue queue = Volley.newRequestQueue(context);
+        String url = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/novoproduto.php";
 
-        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, JSON_URL, jsonData, new Response.Listener<JSONObject>() {
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jsonData, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Toast.makeText(context, "Item cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
@@ -112,13 +112,7 @@ public class NewProductActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, "Erro ao cadastrar ítem!", Toast.LENGTH_SHORT).show();
             }
-        }) {
-            @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";}
-
-
-        };
+        }) ;
         queue.add(postRequest);
     }
 
