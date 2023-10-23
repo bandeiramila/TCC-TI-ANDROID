@@ -142,6 +142,8 @@ public class PopUpItem extends DialogFragment {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(requireContext(), "Item excluído com sucesso", Toast.LENGTH_SHORT).show();
+                listener.onDeleteItem();
+                dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -155,6 +157,7 @@ public class PopUpItem extends DialogFragment {
 
     public interface OnEditClickListener {
         void onEditClick(Products produto);
+        void onDeleteItem();
     }
 
     @Override

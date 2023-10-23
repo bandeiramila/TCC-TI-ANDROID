@@ -21,11 +21,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsListActivity extends AppCompatActivity implements Adapter.OnItemClickListener, PopUpItem.OnEditClickListener {
+public class ProductsListActivity extends AppCompatActivity implements Adapter.OnItemClickListener, PopUpItem.OnEditClickListener, PopUpEditItem.OnItemEditedListener {
     RecyclerView recyclerView;
     List<Products> products;
     private static String JSON_URL = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/listaprodutos.php?nome";
     Adapter adapter;
+    Boolean askEdit = false;
 
 
     @Override
@@ -33,16 +34,16 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.products_list_activity);
         recyclerView = findViewById(R.id.productsList);
-        products = new ArrayList<>();
         extractProducts();
-
     }
 
     private void extractProducts() {
+        products = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
+
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject productObject = response.getJSONObject(i);
@@ -61,7 +62,11 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
                     }
                 }
 
-                showList(products);
+                if (!askEdit){
+                    showList(products);
+                }else {
+                    refreshList(products);
+                }
 
             }
         }, new Response.ErrorListener() {
@@ -81,15 +86,22 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
         recyclerView.setAdapter(adapter);
     }
 
-    public void showAlertDialog(Products produto) {
-        PopUpItem dialogFragment = PopUpItem.newInstance(produto);
-        getSupportFragmentManager().beginTransaction().commit();
-        dialogFragment.show(getSupportFragmentManager(), "PopUpItem");
+    private void refreshList(List<Products> products){
+        adapter.products = products;
+        adapter.notifyDataSetChanged();
     }
+
+    //////////POP UP GERAL //////////
 
     @Override
     public void onItemClick(Products produto) {
         showAlertDialog(produto);
+    }
+
+    public void showAlertDialog(Products produto) {
+        PopUpItem dialogFragment = PopUpItem.newInstance(produto);
+        getSupportFragmentManager().beginTransaction().commit();
+        dialogFragment.show(getSupportFragmentManager(), "PopUpItem");
     }
 
     /////////POP UP DE EDIÇÃO//////////
@@ -104,5 +116,16 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
     @Override
     public void onEditClick(Products produto) {
         showAlertDialogEdit(produto);
+    }
+
+    @Override
+    public void onDeleteItem() {
+        onEditSuccess();
+    }
+
+    @Override
+    public void onEditSuccess() {
+        askEdit = true;
+        extractProducts();
     }
 }
