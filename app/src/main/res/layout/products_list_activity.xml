@@ -7,7 +7,7 @@
     tools:context=".ProductsListActivity">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/title_products_list"
         android:layout_width="355dp"
         android:layout_height="53dp"
         android:layout_marginStart="16dp"
@@ -31,7 +31,7 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@id/button_search_products_list"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/title_products_list" />
 
 <!--    <Button-->
 <!--        android:id="@+id/botao_filtrar"-->
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/button_organize_products_list"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/title_products_list" />
 
     <EditText
         android:id="@+id/input_search_products_list"

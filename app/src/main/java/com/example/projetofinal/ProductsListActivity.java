@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,10 +32,13 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
     List<Products> products;
     private static String JSON_URL = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/listaprodutos.php?nome";
     Adapter adapter;
-    Boolean askEdit = false;
+    Boolean askRefresh = false;
+    Boolean isSearch = false;
     Button btn_search, btn_organize;
     EditText input_search;
     TextView close_search;
+    String url_request;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +67,77 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
                 input_search.setText("");
             }
         });
+
+        input_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Este método é chamado antes do texto ser alterado.
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Este método é chamado quando o texto está sendo alterado.
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String textoDigitado = editable.toString();
+
+                String url_search = JSON_URL + "=" + textoDigitado;
+                //TextView txtTeste = (TextView) findViewById(R.id.title_products_list); //EXCLUIR ISSO PELO AMOR DE DEUS *************************
+                //txtTeste.setText(url_search);
+                //askRefresh = true;
+                //extractProducts(url_search);
+
+                products = new ArrayList<>();
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+                JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url_search, null, new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject productObject = response.getJSONObject(i);
+
+                                Products product = new Products();
+                                product.setId(productObject.getInt("id"));
+                                product.setProductName(productObject.getString("nome_produto".toString()));
+                                product.setBarCode(productObject.getString("codigo_de_barras".toString()));
+                                product.setQuant(productObject.getString("quantidade".toString()));
+                                product.setPrice((float) productObject.getDouble("valor"));
+                                products.add(product);
+
+
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
+                        if (!askRefresh){
+                            showList(products);
+                        }else {
+                            refreshList(products);
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("tag", "onErrorResponse: " + error.getMessage());
+                    }
+                });
+
+                queue.add(jsonArrayRequest);
+
+            }
+        });
     }
 
     private void extractProducts() {
         products = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(this);
+
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -89,7 +160,7 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
                     }
                 }
 
-                if (!askEdit){
+                if (!askRefresh){
                     showList(products);
                 }else {
                     refreshList(products);
@@ -152,7 +223,7 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
 
     @Override
     public void onEditSuccess() {
-        askEdit = true;
+        askRefresh = true;
         extractProducts();
     }
 }
