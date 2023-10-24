@@ -6,6 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,7 +31,9 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
     private static String JSON_URL = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/listaprodutos.php?nome";
     Adapter adapter;
     Boolean askEdit = false;
-
+    Button btn_search, btn_organize;
+    EditText input_search;
+    TextView close_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,27 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
         setContentView(R.layout.products_list_activity);
         recyclerView = findViewById(R.id.productsList);
         extractProducts();
+        btn_search = (Button) findViewById(R.id.button_search_products_list);
+        btn_organize = (Button) findViewById(R.id.button_organize_products_list);
+        input_search = (EditText) findViewById(R.id.input_search_products_list);
+        close_search = (TextView) findViewById(R.id.button_close_products_list);
+
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                input_search.setVisibility(View.VISIBLE);
+                close_search.setVisibility(View.VISIBLE);
+            }
+        });
+
+        close_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                input_search.setVisibility(View.GONE);
+                close_search.setVisibility(View.GONE);
+                input_search.setText("");
+            }
+        });
     }
 
     private void extractProducts() {

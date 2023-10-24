@@ -21,42 +21,73 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/botao_organizar"
+        android:id="@+id/button_organize_products_list"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/botao_organizar"
         android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@id/botao_filtrar"
+        app:layout_constraintEnd_toStartOf="@id/button_search_products_list"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
-    <Button
-        android:id="@+id/botao_filtrar"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/botao_filtrar"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/botao_pesquisar"
-        app:layout_constraintStart_toEndOf="@+id/botao_organizar"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+<!--    <Button-->
+<!--        android:id="@+id/botao_filtrar"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:text="@string/botao_filtrar"-->
+<!--        android:textSize="12sp"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/botao_pesquisar"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/botao_organizar"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/title" />-->
 
     <Button
-        android:id="@+id/botao_pesquisar"
+        android:id="@+id/button_search_products_list"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
         android:text="@string/botao_pesquisar"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/botao_filtrar"
+        app:layout_constraintStart_toEndOf="@+id/button_organize_products_list"
         app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <EditText
+        android:id="@+id/input_search_products_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:paddingEnd="15dp"
+        android:visibility="gone"
+        android:hint="@string/botao_pesquisar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_organize_products_list"
+        android:inputType="textCapSentences|textAutoCorrect"
+        />
+
+    <TextView
+        android:id="@+id/button_close_products_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X"
+        android:textSize="16sp"
+        android:padding="5dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/input_search_products_list"
+        app:layout_constraintTop_toTopOf="@id/input_search_products_list"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productsList"
@@ -68,7 +99,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botao_organizar"
+        app:layout_constraintTop_toBottomOf="@+id/input_search_products_list"
         app:layout_constraintVertical_bias="0.0"
         tools:itemCount="5"
         tools:listitem="@layout/custom_list_layout" />
