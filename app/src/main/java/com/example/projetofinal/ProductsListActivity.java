@@ -33,12 +33,9 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
     private static String JSON_URL = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/listaprodutos.php?nome";
     Adapter adapter;
     Boolean askRefresh = false;
-    Boolean isSearch = false;
     Button btn_search, btn_organize;
     EditText input_search;
     TextView close_search;
-    String url_request;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,14 +81,9 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
                 String textoDigitado = editable.toString();
 
                 String url_search = JSON_URL + "=" + textoDigitado;
-                //TextView txtTeste = (TextView) findViewById(R.id.title_products_list); //EXCLUIR ISSO PELO AMOR DE DEUS *************************
-                //txtTeste.setText(url_search);
-                //askRefresh = true;
-                //extractProducts(url_search);
 
                 products = new ArrayList<>();
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-
                 JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url_search, null, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -107,19 +99,11 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
                                 product.setQuant(productObject.getString("quantidade".toString()));
                                 product.setPrice((float) productObject.getDouble("valor"));
                                 products.add(product);
-
-
                             } catch (JSONException e) {
                                 throw new RuntimeException(e);
                             }
                         }
-
-                        if (!askRefresh){
-                            showList(products);
-                        }else {
-                            refreshList(products);
-                        }
-
+                        showList(products);
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -127,9 +111,7 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
                         Log.d("tag", "onErrorResponse: " + error.getMessage());
                     }
                 });
-
                 queue.add(jsonArrayRequest);
-
             }
         });
     }
@@ -137,7 +119,6 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
     private void extractProducts() {
         products = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(this);
-
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -153,19 +134,15 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
                         product.setQuant(productObject.getString("quantidade".toString()));
                         product.setPrice((float) productObject.getDouble("valor"));
                         products.add(product);
-
-
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
                 }
-
                 if (!askRefresh){
                     showList(products);
                 }else {
                     refreshList(products);
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -173,7 +150,6 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
                 Log.d("tag", "onErrorResponse: " + error.getMessage());
             }
         });
-
         queue.add(jsonArrayRequest);
     }
 
@@ -209,8 +185,7 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
         getSupportFragmentManager().beginTransaction().commit();
         dialogFragment.show(getSupportFragmentManager(), "PopUpEditItem");
     }
-
-
+    
     @Override
     public void onEditClick(Products produto) {
         showAlertDialogEdit(produto);
