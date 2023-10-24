@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -48,6 +50,8 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
         input_search = (EditText) findViewById(R.id.input_search_products_list);
         close_search = (TextView) findViewById(R.id.button_close_products_list);
 
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); // controle de teclado ativo ou inativo
+
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,6 +66,8 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
                 input_search.setVisibility(View.GONE);
                 close_search.setVisibility(View.GONE);
                 input_search.setText("");
+
+                imm.hideSoftInputFromWindow(input_search.getWindowToken(), 0);  //teclado inativado
             }
         });
 
@@ -185,7 +191,7 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
         getSupportFragmentManager().beginTransaction().commit();
         dialogFragment.show(getSupportFragmentManager(), "PopUpEditItem");
     }
-    
+
     @Override
     public void onEditClick(Products produto) {
         showAlertDialogEdit(produto);
