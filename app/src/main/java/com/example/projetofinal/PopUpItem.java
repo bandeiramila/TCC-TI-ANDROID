@@ -106,9 +106,6 @@ public class PopUpItem extends DialogFragment {
     }
 
     private void showDialogConfirm(int id, String nome) {
-        //int id = product.getId();
-        //String nome = product.getProductName();
-
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Confirmação");
         builder.setMessage("Tem certeza que deseja excluir \"" + nome + "\"?");

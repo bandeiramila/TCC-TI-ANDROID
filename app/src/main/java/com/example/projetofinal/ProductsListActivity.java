@@ -1,10 +1,13 @@
 package com.example.projetofinal;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -120,6 +124,13 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
                 queue.add(jsonArrayRequest);
             }
         });
+
+        btn_organize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onCreateDialogOrderBy();
+            }
+        });
     }
 
     private void extractProducts() {
@@ -207,4 +218,22 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
         askRefresh = true;
         extractProducts();
     }
+
+    ///////////////////DIALOGO DE ORDENAÇÃO///////////////////
+    private void onCreateDialogOrderBy(){
+        String[] order_items = getResources().getStringArray(R.array.order_items);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Ordenação");
+        builder.setItems(order_items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                String selecionado = order_items[which];
+                Toast.makeText(ProductsListActivity.this, selecionado, Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
 }

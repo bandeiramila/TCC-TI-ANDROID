@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="order_items">
+        <item>Padrão</item>
+        <item>De A a Z</item>
+        <item>De Z a A</item>
+        <item>Maior preço</item>
+        <item>Menor preço</item>
+        <item>Maior quantidade</item>
+        <item>Menor quantidade</item>
+    </string-array>
+</resources>
