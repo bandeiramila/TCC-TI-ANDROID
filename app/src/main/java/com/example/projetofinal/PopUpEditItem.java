@@ -133,6 +133,7 @@ public class PopUpEditItem extends DialogFragment {
                         listener.onEditSuccess();
                         Toast.makeText(context, "Item editado com sucesso!", Toast.LENGTH_SHORT).show();
                         dismiss();
+
                     }
                 },
                 new Response.ErrorListener() {
