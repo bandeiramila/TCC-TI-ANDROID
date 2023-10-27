@@ -36,7 +36,7 @@ import java.util.List;
 public class ProductsListActivity extends AppCompatActivity implements Adapter.OnItemClickListener, PopUpItem.OnEditClickListener, PopUpEditItem.OnItemEditedListener {
     RecyclerView recyclerView;
     List<Products> products;
-    private static String JSON_URL = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/listaprodutos.php?nome";
+    private static final String JSON_URL = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/listaprodutos.php?";
     Adapter adapter;
     Boolean askRefresh = false;
     Button btn_search, btn_organize;
@@ -48,7 +48,7 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.products_list_activity);
         recyclerView = findViewById(R.id.productsList);
-        extractProducts();
+        extractProducts(JSON_URL, false);
         btn_search = (Button) findViewById(R.id.button_search_products_list);
         btn_organize = (Button) findViewById(R.id.button_organize_products_list);
         input_search = (EditText) findViewById(R.id.input_search_products_list);
@@ -91,37 +91,7 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
                 String textoDigitado = editable.toString();
 
                 String url_search = JSON_URL + "=" + textoDigitado;
-
-                products = new ArrayList<>();
-                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url_search, null, new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject productObject = response.getJSONObject(i);
-
-                                Products product = new Products();
-                                product.setId(productObject.getInt("id"));
-                                product.setProductName(productObject.getString("nome_produto".toString()));
-                                product.setBarCode(productObject.getString("codigo_de_barras".toString()));
-                                product.setQuant(productObject.getString("quantidade".toString()));
-                                product.setPrice((float) productObject.getDouble("valor"));
-                                products.add(product);
-                            } catch (JSONException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                        showList(products);
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("tag", "onErrorResponse: " + error.getMessage());
-                    }
-                });
-                queue.add(jsonArrayRequest);
+                extractProducts(url_search, false);
             }
         });
 
@@ -133,10 +103,10 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
         });
     }
 
-    private void extractProducts() {
+    private void extractProducts(String url, boolean askRefresh) {
         products = new ArrayList<>();
-        RequestQueue queue = Volley.newRequestQueue(this);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONArray>() {
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
 
@@ -146,9 +116,9 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
 
                         Products product = new Products();
                         product.setId(productObject.getInt("id"));
-                        product.setProductName(productObject.getString("nome_produto".toString()));
-                        product.setBarCode(productObject.getString("codigo_de_barras".toString()));
-                        product.setQuant(productObject.getString("quantidade".toString()));
+                        product.setProductName(productObject.getString("nome_produto"));
+                        product.setBarCode(productObject.getString("codigo_de_barras"));
+                        product.setQuant(productObject.getString("quantidade"));
                         product.setPrice((float) productObject.getDouble("valor"));
                         products.add(product);
                     } catch (JSONException e) {
@@ -216,7 +186,7 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
     @Override
     public void onEditSuccess() {
         askRefresh = true;
-        extractProducts();
+        extractProducts(JSON_URL, true);
     }
 
     ///////////////////DIALOGO DE ORDENAÇÃO///////////////////
@@ -227,8 +197,40 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
         builder.setItems(order_items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
-                String selecionado = order_items[which];
-                Toast.makeText(ProductsListActivity.this, selecionado, Toast.LENGTH_SHORT).show();
+                //String selecionado = order_items[which];
+                //Toast.makeText(ProductsListActivity.this, selecionado, Toast.LENGTH_SHORT).show();
+                String url = JSON_URL;
+                switch (which) {
+                    case 0:
+                        url = JSON_URL;
+                        //Toast.makeText(ProductsListActivity.this, "Padrão", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        url = JSON_URL + "orderby=nome_produto&sentido=asc";
+                        //Toast.makeText(ProductsListActivity.this, "De A a Z", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2:
+                        url = JSON_URL + "orderby=nome_produto&sentido=desc";
+                        //Toast.makeText(ProductsListActivity.this, "De Z a A", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 3:
+                        url = JSON_URL + "orderby=valor&sentido=desc";
+                        //Toast.makeText(ProductsListActivity.this, "Maior preço", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 4:
+                        url = JSON_URL + "orderby=valor&sentido=asc";
+                        //Toast.makeText(ProductsListActivity.this, "Menor preço", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 5:
+                        url = JSON_URL + "orderby=quantidade&sentido=desc";
+                        //Toast.makeText(ProductsListActivity.this, "Maior quantidade", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 6:
+                        url = JSON_URL + "orderby=quantidade&sentido=asc";
+                        //Toast.makeText(ProductsListActivity.this, "Menor quantidade", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                extractProducts(url, false);
             }
         });
         AlertDialog dialog = builder.create();
