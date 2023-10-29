@@ -90,7 +90,7 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
             public void afterTextChanged(Editable editable) {
                 String textoDigitado = editable.toString();
 
-                String url_search = JSON_URL + "=" + textoDigitado;
+                String url_search = JSON_URL + "nome=" + textoDigitado;
                 extractProducts(url_search, false);
             }
         });
