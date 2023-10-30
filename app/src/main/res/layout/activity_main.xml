@@ -77,10 +77,24 @@
         android:layout_marginBottom="16dp"
         android:text="@string/botao_consultar"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_clients_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_products_list" />
+    <Button
+        android:id="@+id/button_clients_list"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Listar Clientes"
+        android:textSize="16sp"
+        android:onClick="listarClientes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_orcamento_list"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

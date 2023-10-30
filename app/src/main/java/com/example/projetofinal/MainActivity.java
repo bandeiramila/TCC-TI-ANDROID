@@ -29,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void listarClientes(View view) {
+        Intent intent = new Intent(this, ClientList.class);
+        startActivity(intent);
+    }
+
     public double verificaVirgula(String valor){
         String valortratado = valor.replace(",", "").replaceAll("\\s", "");
 
