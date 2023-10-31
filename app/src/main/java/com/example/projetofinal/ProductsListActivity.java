@@ -236,6 +236,4 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-
 }

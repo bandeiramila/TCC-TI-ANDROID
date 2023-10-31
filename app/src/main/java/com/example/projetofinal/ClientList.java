@@ -1,10 +1,12 @@
 package com.example.projetofinal;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class ClientList extends AppCompatActivity implements AdapterClients.OnClientClickListener {
+public class ClientList extends AppCompatActivity implements AdapterClients.OnClientClickListener, PopUpClient.OnButtonClickListener, PopUpEditClient.OnClientEditedListener {
     RecyclerView recyclerView;
     List<Clients> clients;
     private static final String JSON_URL = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/listaclientes.php?";
@@ -86,6 +89,7 @@ public class ClientList extends AppCompatActivity implements AdapterClients.OnCl
             @Override
             public void afterTextChanged(Editable editable) {
                 String textoDigitado = editable.toString();
+
                 String url_search = JSON_URL + "nome=" + textoDigitado;
                 extractClients(url_search, false);
             }
@@ -93,9 +97,7 @@ public class ClientList extends AppCompatActivity implements AdapterClients.OnCl
 
         btn_organize.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //onCreateDialogOrderBy();
-            }
+            public void onClick(View view) {onCreateDialogOrderBy();}
         });
     }
 
@@ -105,6 +107,7 @@ public class ClientList extends AppCompatActivity implements AdapterClients.OnCl
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
+
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject clientObject = response.getJSONObject(i);
@@ -153,10 +156,9 @@ public class ClientList extends AppCompatActivity implements AdapterClients.OnCl
     }
 
     /////////POP UP GERAL ///////////
+
     @Override
-    public void onClientClick(Clients clients) {
-        showAlertDialog(clients);
-    }
+    public void onClientClick(Clients clients) { showAlertDialog(clients); }
 
     public void showAlertDialog(Clients client) {
         PopUpClient dialogFragment = PopUpClient.newInstance(client);
@@ -166,21 +168,51 @@ public class ClientList extends AppCompatActivity implements AdapterClients.OnCl
 
     /////////POP UP EDIÇÃO //////////
 
+    public void showAlertDialogEditClient(Clients client) {
+        PopUpEditClient dialogFragment = PopUpEditClient.newInstance(client);
+        getSupportFragmentManager().beginTransaction().commit();
+        dialogFragment.show(getSupportFragmentManager(), "PopUpEditClient");
+    }
 
+    @Override
+    public void onEditClick(Clients client) { showAlertDialogEditClient(client); }
 
+    @Override
+    public void onDeleteClick() { onEditSuccess(); }
 
+    @Override
+    public void onEditSuccess() {
+        askRefresh = true;
+        extractClients(JSON_URL, true);
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //////////////// ORDENAÇÃO //////////////
+    private void onCreateDialogOrderBy(){
+        String[] order_clients = getResources().getStringArray(R.array.order_clients);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Ordenação");
+        builder.setItems(order_clients, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                String url = JSON_URL;
+                switch (which) {
+                    case 0:
+                        url = JSON_URL;
+                        Toast.makeText(ClientList.this, "Padrão", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        url = JSON_URL + "orderby=nome&sentido=asc";
+                        Toast.makeText(ClientList.this, "De A a Z", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2:
+                        url = JSON_URL + "orderby=nome&sentido=desc";
+                        Toast.makeText(ClientList.this, "De Z a A", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                extractClients(url, false);
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }

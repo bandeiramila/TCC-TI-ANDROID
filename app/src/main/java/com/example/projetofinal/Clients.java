@@ -1,6 +1,8 @@
 package com.example.projetofinal;
 
-public class Clients {
+import java.io.Serializable;
+
+public class Clients implements Serializable {
     private int id;
     private String nomeCliente;
     private String cpf_cnpj;

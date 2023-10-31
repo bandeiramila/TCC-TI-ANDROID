@@ -22,6 +22,7 @@
     <string name="title_new_budget">Cadastrar Novo Orçamento</string>
     <string name="title_products_list">Lista de Produtos</string>
     <string name="title_popup_editar">EDIÇÃO DE ÍTEM</string>
+    <string name="title_popup_edit_client">EDIÇÃO DE CLIENTE</string>
 
     <string name="input_bar_code">Código de Barras</string>
     <string name="input_cpf_cnpj">CPF/CNPJ</string>
@@ -31,19 +32,29 @@
     <string name="input_valor">Valor Unitário</string>
     <string name="input_valor_zerado">00,00</string>
 
+    <string name="text_bairro">Bairro:</string>
+    <string name="text_cep">CEP:</string>
+    <string name="text_cidade">Cidade:</string>
     <string name="text_client">Cliente: </string>
     <string name="text_codigo_barras">Código de Barras</string>
     <string name="text_cpf_cnpj">CPF/CNPJ: </string>
+    <string name="text_email">Email:</string>
     <string name="text_item">ítem: </string>
     <string name="text_itens_list">Lista de Ítens</string>
+    <string name="text_logradouro">Logradouro:</string>
+    <string name="text_nome_cliente">Nome do Cliente</string>
     <string name="text_nome_produto">Nome do Produto</string>
+    <string name="text_numero">Número</string>
     <string name="text_opcional">*Opcional</string>
     <string name="text_quantidade">Quantidade</string>
+    <string name="text_telefone">Telefone</string>
     <string name="text_total_cost">Valor Total: </string>
 
     <string name="receive_client">Nome cliente</string>
     <string name="receive_cpf_cnpj">Cadastro cliente</string>
     <string name="receive_total_cost">R$ 00,00</string>
+    <string name="text_adicionar_cliente">Adicionar Cliente</string>
+    <string name="text_adicionar_produto">Adicionar Produto</string>
 
 
 </resources>

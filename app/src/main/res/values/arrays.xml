@@ -9,4 +9,10 @@
         <item>Maior quantidade</item>
         <item>Menor quantidade</item>
     </string-array>
+
+    <string-array name="order_clients">
+        <item>Padrão</item>
+        <item>De A a Z</item>
+        <item>De Z a A</item>
+    </string-array>
 </resources>

@@ -1,8 +1,16 @@
 package com.example.projetofinal;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,18 +19,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.jetbrains.annotations.Nullable;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 
@@ -30,12 +35,14 @@ public class PopUpClient extends DialogFragment {
     private static final String ITEM = "item";
     Clients client;
     private OnButtonClickListener listener;
-    public PopUpClient(){   }
+
+    public PopUpClient() {
+    }
 
     public static PopUpClient newInstance(Clients client) {
         PopUpClient fragment = new PopUpClient();
         Bundle args = new Bundle();
-        args.putSerializable(ITEM, (Serializable) client);
+        args.putSerializable(ITEM, client);
         fragment.setArguments(args);
         return fragment;
     }
@@ -115,7 +122,7 @@ public class PopUpClient extends DialogFragment {
         dialog.show();
     }
 
-    public void excluirItem(Context context, int id){
+    public void excluirItem(Context context, int id) {
         String JSON_URL = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/deletacliente.php?id=" + id;
 
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -145,7 +152,7 @@ public class PopUpClient extends DialogFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof OnButtonClickListener){
+        if (context instanceof OnButtonClickListener) {
             listener = (OnButtonClickListener) context;
         } else {
             throw new ClassCastException();

@@ -118,7 +118,6 @@ public class PopUpEditItem extends DialogFragment {
                 editarDados(getContext(), jsonData);
             }
         });
-
     }
 
     private void editarDados(Context context, JSONObject jsonData) {
@@ -129,11 +128,9 @@ public class PopUpEditItem extends DialogFragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-
                         listener.onEditSuccess();
                         Toast.makeText(context, "Item editado com sucesso!", Toast.LENGTH_SHORT).show();
                         dismiss();
-
                     }
                 },
                 new Response.ErrorListener() {
