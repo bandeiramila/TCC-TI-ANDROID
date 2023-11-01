@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +44,7 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
     Button btn_search, btn_organize;
     EditText input_search;
     TextView close_search;
+    FloatingActionButton fab_add_product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
         btn_organize = (Button) findViewById(R.id.button_organize_products_list);
         input_search = (EditText) findViewById(R.id.input_search_products_list);
         close_search = (TextView) findViewById(R.id.button_close_products_list);
+        fab_add_product = (FloatingActionButton) findViewById(R.id.fab_new_product);
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); // controle de teclado ativo ou inativo
 
@@ -99,6 +103,14 @@ public class ProductsListActivity extends AppCompatActivity implements Adapter.O
             @Override
             public void onClick(View view) {
                 onCreateDialogOrderBy();
+            }
+        });
+
+        fab_add_product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), NewProductActivity.class);
+                startActivity(intent);
             }
         });
     }

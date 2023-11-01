@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="355dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/title_new_client"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- ************* NOME **************-->
+    <TextView
+        android:id="@+id/edita_cliente_nome_add_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/text_nome_cliente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <EditText
+        android:id="@+id/input_nome_cliente_add_client"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/input_nome"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/edita_cliente_nome_add_client"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="textCapSentences|textAutoCorrect"
+        android:imeOptions="actionNext"/>
+
+    <!-- ************* CPF/CNPJ **************-->
+    <TextView
+        android:id="@+id/edita_cliente_pfpj_add_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/text_cpf_cnpj"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_nome_cliente_add_client" />
+
+    <EditText
+        android:id="@+id/input_digita_pfpj_add_client"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/input_cpf_cnpj"
+        android:textSize="14sp"
+        android:inputType="number"
+        android:digits="0123456789"
+        app:layout_constraintTop_toBottomOf="@id/edita_cliente_pfpj_add_client"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:imeOptions="actionNext"/>
+
+    <!-- ************* TELEFONE **************-->
+    <TextView
+        android:id="@+id/edita_cliente_telefone_add_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/text_telefone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_digita_pfpj_add_client" />
+
+    <EditText
+        android:id="@+id/input_digita_telefone_add_client"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:inputType="number"
+        android:digits="0123456789"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edita_cliente_telefone_add_client"
+        android:imeOptions="actionNext"/>
+
+    <!-- ************* EMAIL **************-->
+    <TextView
+        android:id="@+id/edita_cliente_email_add_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/text_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_digita_telefone_add_client" />
+
+    <EditText
+        android:id="@+id/input_digita_email_add_client"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/text_email"
+        android:textSize="14sp"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edita_cliente_email_add_client" />
+
+    <!-- ************* CEP **************-->
+    <TextView
+        android:id="@+id/edita_cliente_cep_add_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/text_cep"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_digita_email_add_client" />
+
+    <EditText
+        android:id="@+id/input_digita_cep_add_client"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/text_cep"
+        android:textSize="14sp"
+        android:inputType="number"
+        android:digits="1234567890"
+        app:layout_constraintEnd_toStartOf="@id/input_digita_cidade_add_client"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edita_cliente_cep_add_client"
+        android:imeOptions="actionNext"/>
+
+    <!-- ************* CIDADE **************-->
+    <TextView
+        android:id="@+id/edita_cliente_cidade_add_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_cidade"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@id/input_digita_email_add_client"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/input_digita_cidade_add_client"
+        app:layout_constraintStart_toStartOf="@id/input_digita_cidade_add_client"/>
+
+    <EditText
+        android:id="@+id/input_digita_cidade_add_client"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/text_cidade"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/input_digita_cep_add_client"
+        app:layout_constraintTop_toBottomOf="@id/edita_cliente_cep_add_client"
+        android:inputType="textCapSentences|textAutoCorrect" />
+
+    <!-- ************* LOGRADOURO **************-->
+    <TextView
+        android:id="@+id/edita_cliente_logradouro_add_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/text_logradouro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_digita_cep_add_client" />
+
+    <EditText
+        android:id="@+id/input_digita_logradouro_add_client"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/text_logradouro"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edita_cliente_logradouro_add_client"
+        android:inputType="textCapSentences|textAutoCorrect" />
+
+    <!-- ************* BAIRRO **************-->
+    <TextView
+        android:id="@+id/edita_cliente_bairro_add_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/text_bairro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_digita_logradouro_add_client" />
+
+    <EditText
+        android:id="@+id/input_digita_bairro_add_client"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/text_bairro"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/input_digita_numero_add_client"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edita_cliente_bairro_add_client"
+        android:inputType="textCapSentences|textAutoCorrect"
+        android:imeOptions="actionNext"/>
+
+    <!-- ************* NUMERO **************-->
+    <TextView
+        android:id="@+id/edita_cliente_numero_add_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_numero"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@id/input_digita_logradouro_add_client"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/input_digita_numero_add_client"/>
+
+    <EditText
+        android:id="@+id/input_digita_numero_add_client"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/text_numero"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/input_digita_bairro_add_client"
+        app:layout_constraintTop_toBottomOf="@id/edita_cliente_numero_add_client"
+        android:inputType="textCapSentences"
+        android:imeOptions="actionSend"/>
+
+    <TextView
+        android:id="@+id/text_opcional_codigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/text_opcional"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toTopOf="@+id/input_digita_numero_add_client"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/botao_limpar_novo_produto"
+        android:layout_width="133dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/botao_limpar"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/botao_salvar_novo_produto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_digita_numero_add_client" />
+
+    <Button
+        android:id="@+id/botao_salvar_novo_produto"
+        android:layout_width="133dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/botao_salvar"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/botao_limpar_novo_produto"
+        app:layout_constraintTop_toBottomOf="@+id/input_digita_numero_add_client" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

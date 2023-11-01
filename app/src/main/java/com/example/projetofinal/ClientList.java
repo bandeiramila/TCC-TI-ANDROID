@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +44,7 @@ public class ClientList extends AppCompatActivity implements AdapterClients.OnCl
     Button btn_search, btn_organize;
     EditText input_search;
     TextView close_search;
+    FloatingActionButton fab_add_client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class ClientList extends AppCompatActivity implements AdapterClients.OnCl
         btn_organize = (Button) findViewById(R.id.button_organize_client_list);
         input_search = (EditText) findViewById(R.id.input_search_client_list);
         close_search = (TextView) findViewById(R.id.button_close_client_list);
+        fab_add_client = (FloatingActionButton) findViewById(R.id.fab_new_client);
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -98,6 +102,14 @@ public class ClientList extends AppCompatActivity implements AdapterClients.OnCl
         btn_organize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {onCreateDialogOrderBy();}
+        });
+
+        fab_add_client.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), NewClientActivity.class);
+                startActivity(intent);
+            }
         });
     }
 
