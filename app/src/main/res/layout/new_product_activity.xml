@@ -28,6 +28,7 @@
         android:layout_marginTop="88dp"
         android:text="@string/botao_codigo_barras"
         android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/input_nome_novo_produto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

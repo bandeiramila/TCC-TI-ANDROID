@@ -116,5 +116,4 @@ public class NewProductActivity extends AppCompatActivity {
         queue.add(postRequest);
     }
 
-
 }

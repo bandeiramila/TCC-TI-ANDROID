@@ -3,6 +3,7 @@
 
     <string name="botao_cadastrar">Cadastrar Produtos</string>
     <string name="botao_cancelar">Cancelar</string>
+    <string name="botao_clientes">Clientes</string>
     <string name="botao_codigo_barras">Ler Código de Barras</string>
     <string name="botao_consultar">Consultar Orçamentos</string>
     <string name="botao_editar">Editar</string>
@@ -11,8 +12,8 @@
     <string name="botao_filtrar">Filtrar</string>
     <string name="botao_inserir">Inserir ítem</string>
     <string name="botao_limpar">Limpar</string>
-    <string name="botao_listar">Listar Produtos</string>
-    <string name="botao_orcamento">Fazer Orçamento</string>
+    <string name="botao_produtos">Produtos</string>
+    <string name="botao_orcamento">Orçamentos</string>
     <string name="botao_organizar">Organizar por</string>
     <string name="botao_pesquisar">Pesquisar</string>
     <string name="botao_salvar">Salvar</string>
