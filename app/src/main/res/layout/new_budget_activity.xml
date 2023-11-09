@@ -69,18 +69,19 @@
         android:layout_marginTop="28dp"
         android:text="@string/botao_limpar"
         android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/botao_salvar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_digitar_empenho" />
 
     <Button
         android:id="@+id/botao_salvar"
-        android:layout_width="133dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/botao_salvar"
+        android:text="Prosseguir/Inserir itens"
         android:textSize="16sp"
         android:onClick="fazerOrcamentoSalvar"
         app:layout_constraintEnd_toEndOf="parent"
