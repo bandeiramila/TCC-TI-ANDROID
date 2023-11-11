@@ -4,26 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_screen"
+    android:elevation="0dp"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/book_svg"
-        app:tint="@color/red" />
+        app:srcCompat="@drawable/book_colored_svg" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="LUCINDA LIVROS"
+        android:fontFamily="casual"
+        android:text="@string/app_title"
+        android:textColor="@color/orange"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,10 +38,10 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:onClick="cadastrarProduto"
         android:text="@string/botao_cadastrar"
         android:textSize="16sp"
         android:visibility="gone"
-        android:onClick="cadastrarProduto"
         app:layout_constraintBottom_toTopOf="@+id/button_orcamento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -50,9 +54,9 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:onClick="fazerOrcamento"
         android:text="@string/botao_orcamento"
         android:textSize="16sp"
-        android:onClick="fazerOrcamento"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/button_products_list"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,12 +65,15 @@
 
     <Button
         android:id="@+id/button_products_list"
+        style="@style/StyledButton"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:elevation="32dp"
+        android:onClick="listarProdutos"
         android:text="@string/botao_produtos"
         android:textSize="16sp"
-        android:onClick="listarProdutos"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toTopOf="@+id/button_orcamento_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,29 +81,32 @@
 
     <Button
         android:id="@+id/button_orcamento_list"
+        style="@style/StyledButton"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_button"
         android:text="@string/botao_orcamento"
         android:textSize="16sp"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toTopOf="@id/button_clients_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_products_list" />
+
     <Button
         android:id="@+id/button_clients_list"
+        style="@style/StyledButton"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_button"
+        android:onClick="listarClientes"
         android:text="@string/botao_clientes"
         android:textSize="16sp"
-        android:onClick="listarClientes"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_orcamento_list"/>
-
-
-
-
+        app:layout_constraintTop_toBottomOf="@id/button_orcamento_list" />
 </androidx.constraintlayout.widget.ConstraintLayout>
