@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="StyledButton" parent="Widget.Material3.Button.ElevatedButton">
+        <item name="android:background">@drawable/bg_button</item>
+        <item name="android:backgroundTint">@null</item>
+        <item name="android:shadowRadius">0.5</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:spotShadowAlpha">0.8</item>
+        <item name="android:outlineSpotShadowColor" tools:targetApi="p">#673AB7</item>
+    </style>
+
+    <style name="StyledFAB" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="android:src">@android:drawable/ic_input_add</item>
+        <item name="android:backgroundTint">@color/light_orange</item>
+        <item name="android:shadowRadius">0.5</item>
+        <item name="cornerSize">50%</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:ambientShadowAlpha">0.01</item>
+        <item name="android:spotShadowAlpha">0.08</item>
+        <item name="fabSize">normal</item>
+        <item name="tintMode">multiply</item>
+        <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/red</item>
+        <item name="shapeAppearanceOverlay">@style/fabShapeStyle1</item>
+    </style>
+
+    <style name="fabShapeStyle1" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">50%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+</resources>

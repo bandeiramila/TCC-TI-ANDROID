@@ -57,6 +57,7 @@
     <string name="text_adicionar_cliente">Adicionar Cliente</string>
     <string name="text_adicionar_produto">Adicionar Produto</string>
     <string name="title_new_client">Cadastrar Novo Cliente</string>
+    <string name="app_title">LUCINDA LIVROS</string>
 
 
 </resources>
