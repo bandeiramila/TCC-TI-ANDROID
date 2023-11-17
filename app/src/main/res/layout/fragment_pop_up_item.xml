@@ -29,6 +29,8 @@
             android:layout_marginStart="4dp"
             android:padding="0dp"
             android:text="@string/botao_editar"
+            style="@style/StyledButton"
+            app:backgroundTint="@null"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/itemNome"
             app:layout_constraintEnd_toStartOf="@id/popup_botao_excluir"/>
@@ -40,6 +42,8 @@
             android:padding="0dp"
             android:text="@string/botao_excluir"
             android:layout_marginStart="4dp"
+            style="@style/StyledButton"
+            app:backgroundTint="@null"
             app:layout_constraintStart_toEndOf="@+id/popup_botao_editar"
             app:layout_constraintTop_toBottomOf="@id/itemNome"
             app:layout_constraintEnd_toStartOf="@id/popup_botao_cancelar"/>
@@ -51,6 +55,8 @@
             android:layout_marginStart="4dp"
             android:padding="0dp"
             android:text="@string/botao_cancelar"
+            style="@style/StyledButton"
+            app:backgroundTint="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/popup_botao_excluir"
             app:layout_constraintTop_toBottomOf="@id/itemNome" />

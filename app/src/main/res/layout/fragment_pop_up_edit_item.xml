@@ -127,6 +127,8 @@
         android:layout_marginStart="4dp"
         android:padding="0dp"
         android:text="@string/botao_enviar"
+        style="@style/StyledButton"
+        app:backgroundTint="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_digita_valor_popup"
         app:layout_constraintEnd_toStartOf="@id/popup_botao_cancelar_popup"/>
@@ -138,6 +140,8 @@
         android:layout_marginStart="4dp"
         android:padding="0dp"
         android:text="@string/botao_cancelar"
+        style="@style/StyledButton"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/popup_botao_enviar_popup"
         app:layout_constraintTop_toBottomOf="@id/input_digita_valor_popup" />

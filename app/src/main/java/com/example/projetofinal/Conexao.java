@@ -1,5 +1,5 @@
 package com.example.projetofinal;
 
 public class Conexao {
-    public static final String IP = "192.168.50.238";
+    public static final String IP = "172.16.8.12";
 }
