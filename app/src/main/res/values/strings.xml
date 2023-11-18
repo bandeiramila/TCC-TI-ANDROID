@@ -18,6 +18,7 @@
     <string name="botao_pesquisar">Pesquisar</string>
     <string name="botao_salvar">Salvar</string>
 
+    <string name="title_budgets_client_list">Lista Clientes com Orçamento</string>
     <string name="title_clients_list">Lista de Clientes</string>
     <string name="title_new_product">Cadastrar Novo Produto</string>
     <string name="title_new_budget">Cadastrar Novo Orçamento</string>
@@ -56,6 +57,7 @@
     <string name="receive_total_cost">R$ 00,00</string>
     <string name="text_adicionar_cliente">Adicionar Cliente</string>
     <string name="text_adicionar_produto">Adicionar Produto</string>
+    <string name="text_adicionar_orcamento">Adicionar Orçamento</string>
     <string name="title_new_client">Cadastrar Novo Cliente</string>
     <string name="app_title">LUCINDA LIVROS</string>
 
