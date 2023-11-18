@@ -14,16 +14,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void cadastrarProduto(View view) {
-        Intent intent = new Intent(this, NewProductActivity.class);
-        startActivity(intent);
-    }
-
-    public void fazerOrcamento(View view) {
-        Intent intent = new Intent(this, NewBudgetActivity.class);
-        startActivity(intent);
-    }
-
     public void listarProdutos(View view) {
         Intent intent = new Intent(this, ProductsListActivity.class);
         startActivity(intent);
@@ -31,6 +21,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void listarClientes(View view) {
         Intent intent = new Intent(this, ClientList.class);
+        startActivity(intent);
+    }
+
+    public void listarOrcamentos(View view) {
+        Intent intent = new Intent(this, BudgetClientsList.class);
         startActivity(intent);
     }
 
