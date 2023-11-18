@@ -115,53 +115,22 @@
       />
 
   <TextView
-      android:id="@+id/quantProdTitle"
-      android:layout_width="25dp"
+      android:id="@+id/clientsTitleList"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
       android:layout_marginTop="10dp"
-      android:text="QT"
+      android:text="Clientes"
       android:textSize="16sp"
-      android:textAlignment="center"
+      android:textAlignment="textStart"
       android:textColor="@android:color/tertiary_text_light"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintBottom_toTopOf="@id/clientsList"
       app:layout_constraintTop_toBottomOf="@id/input_search_client_list"
-      app:layout_constraintEnd_toStartOf="@id/nameProdTitle"
-      app:layout_constraintHorizontal_bias="0.0"/>
-
-  <TextView
-      android:id="@+id/nameProdTitle"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="10dp"
-      android:paddingStart="5dp"
-      android:paddingEnd="5dp"
-      android:text="NOME DO PRODUTO"
-      android:textSize="16sp"
-      android:textStyle="bold"
-      android:textColor="@android:color/tertiary_text_light"
-      app:layout_constraintEnd_toStartOf="@id/priceProdTitle"
-      app:layout_constraintStart_toEndOf="@id/quantProdTitle"
-      app:layout_constraintBottom_toTopOf="@id/clientsList"
-      app:layout_constraintTop_toBottomOf="@id/input_search_client_list"
-      app:layout_constraintHorizontal_bias="0.0"/>
-
-  <TextView
-      android:id="@+id/priceProdTitle"
-      android:layout_width="80dp"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="8dp"
-      android:layout_marginTop="10dp"
-      android:text="VALOR UN"
-      android:textSize="16sp"
-      android:textAlignment="center"
-      android:textColor="@android:color/tertiary_text_light"
-      app:layout_constraintStart_toEndOf="@id/nameProdTitle"
-      app:layout_constraintBottom_toTopOf="@id/clientsList"
-      app:layout_constraintTop_toBottomOf="@id/input_search_client_list"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"/>
+
 
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/clientsList"
@@ -172,7 +141,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/nameProdTitle"
+      app:layout_constraintTop_toBottomOf="@+id/clientsTitleList"
       app:layout_constraintVertical_bias="0.5"
       tools:itemCount="5"
       tools:listitem="@layout/custom_client_list_layout" />
