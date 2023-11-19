@@ -29,7 +29,7 @@ public class AdapterClients extends RecyclerView.Adapter<AdapterClients.ViewHold
         this.clickListener = listener;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView nameClient;
         CardView clientLineCardView;
 
