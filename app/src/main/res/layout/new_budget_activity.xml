@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/input_nome_cliente"
+        android:id="@+id/input_client_name_new_budget"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_nome_cliente" />
+        app:layout_constraintTop_toBottomOf="@+id/input_client_name_new_budget" />
 
     <EditText
         android:id="@+id/input_digitar_empenho"

@@ -14,6 +14,14 @@ public class Clients implements Serializable {
     private String logradouro;
     private String numero;
 
+    public Clients(){}
+
+    public Clients(int id,String nome,String pfpj){
+        this.id = id;
+        this.nomeCliente = nome;
+        this.cpf_cnpj = pfpj;
+    }
+
     public int getId() {
         return id;
     }
