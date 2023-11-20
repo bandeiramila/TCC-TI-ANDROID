@@ -2,13 +2,18 @@ package com.example.projetofinal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,17 +29,48 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class NewBudgetActivity extends AppCompatActivity {
 
     List<Clients> clients;
     ArrayList<String> clientNames;
     Clients client;
+    EditText pfpj, empenho;
+    Spinner spinner;
+    Button btnSalvar;
+    int idClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_budget_activity);
+        pfpj = (EditText) findViewById(R.id.input_digitar_cpf_cnpj_new_budget);
+        btnSalvar = (Button) findViewById(R.id.botao_salvar_novo_orcamento);
+        empenho = (EditText) findViewById(R.id.input_digitar_empenho);
+
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int id = idClient;
+                String empenho_cliente = empenho.getText().toString();
+
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("id_cliente", id);
+                    jsonObject.put("empenho", empenho_cliente);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                cadastrarOrcamento(getApplicationContext(),jsonObject);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
         fetchClientList();
     }
 
@@ -70,22 +106,30 @@ public class NewBudgetActivity extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
                 }
+                clientNames.add("Cadastrar novo cliente");
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(NewBudgetActivity.this, android.R.layout.simple_spinner_dropdown_item, clientNames);
-                Spinner spinner = findViewById(R.id.input_client_name_new_budget);
+                spinner = findViewById(R.id.input_client_name_new_budget);
                 spinner.setAdapter(adapter);
 
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                         if (position > 0) {
-                            String selectedClientName = clientNames.get(position);
-                            fetchClientData(selectedClientName);
+                            if (position == clientNames.size()-1){
+                                Intent intent = new Intent(getApplicationContext(),NewClientActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            } else {
+                                onClientSelected(position);
+                            }
+                        } else {
+                            pfpj.setText("");
                         }
                     }
                     @Override
                     public void onNothingSelected(AdapterView<?> adapterView) {
-
                     }
                 });
             }
@@ -98,7 +142,30 @@ public class NewBudgetActivity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
 
-    private void fetchClientData(String selectedClientName){
-
+    private void onClientSelected(int position){
+        Clients cliente = clients.get(position-1);
+        String pj = cliente.getCpf_cnpj();
+        idClient = cliente.getId();
+        pfpj.setText(pj);
     }
+
+    private void cadastrarOrcamento(Context context, JSONObject jsonObject){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/novoorcamento.php";
+
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(context, "Orçamento cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro ao cadastrar orçamento!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(postRequest);
+    }
+
+
 }
