@@ -133,7 +133,6 @@
         android:textSize="16sp"
         style="@style/StyledButton"
         app:backgroundTint="@null"
-        android:onClick="fazerOrcamentoSalvar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

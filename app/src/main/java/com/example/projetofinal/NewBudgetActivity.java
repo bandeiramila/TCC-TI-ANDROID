@@ -35,6 +35,8 @@ public class NewBudgetActivity extends AppCompatActivity {
 
     List<Clients> clients;
     ArrayList<String> clientNames;
+    List<ClientsBudget> budgetClient;
+    ClientsBudget budget;
     Clients client;
     EditText pfpj, empenho;
     Spinner spinner;
@@ -48,17 +50,29 @@ public class NewBudgetActivity extends AppCompatActivity {
         pfpj = (EditText) findViewById(R.id.input_digitar_cpf_cnpj_new_budget);
         btnSalvar = (Button) findViewById(R.id.botao_salvar_novo_orcamento);
         empenho = (EditText) findViewById(R.id.input_digitar_empenho);
+    }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        fetchClientList();
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String empenho_cliente;
+                if (empenho.getText().toString().isEmpty()) {
+                    empenho_cliente = "";
+                } else {
+                    empenho_cliente = empenho.getText().toString();
+                }
+                String novoempenho = empenho_cliente;
                 int id = idClient;
-                String empenho_cliente = empenho.getText().toString();
 
                 JSONObject jsonObject = new JSONObject();
                 try {
                     jsonObject.put("id_cliente", id);
-                    jsonObject.put("empenho", empenho_cliente);
+                    jsonObject.put("empenho", novoempenho);
+                    jsonObject.put("data_solicitacao","");
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -66,17 +80,6 @@ public class NewBudgetActivity extends AppCompatActivity {
                 cadastrarOrcamento(getApplicationContext(),jsonObject);
             }
         });
-    }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-        fetchClientList();
-    }
-
-    public void fazerOrcamentoSalvar(View view){
-        Intent intent = new Intent(this, NewBudgetActivityIncrease.class);
-        startActivity(intent);
     }
 
     private void fetchClientList(){
@@ -88,7 +91,6 @@ public class NewBudgetActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray response) {
                 clientNames = new ArrayList<>();
-                clients = new ArrayList<>();
                 clientNames.add("Escolha o Cliente: ");
 
                 for (int i = 0; i < response.length(); i++) {
@@ -151,20 +153,56 @@ public class NewBudgetActivity extends AppCompatActivity {
 
     private void cadastrarOrcamento(Context context, JSONObject jsonObject){
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/novoorcamento.php";
+        String url = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/novoorcamento.php?";
 
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Toast.makeText(context, "Orçamento cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                getIdBudget();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, "Erro ao cadastrar orçamento!", Toast.LENGTH_SHORT).show();
+                Log.d("tag", "onErrorResponse: " + error.getMessage());
             }
         });
         queue.add(postRequest);
+    }
+
+    private void getIdBudget(){
+        String url = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/listaorcamentos.php?last_id=" + idClient;
+        budgetClient = new ArrayList<>();
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    JSONObject jsonObject = response.getJSONObject(0);
+                    budget = new ClientsBudget();
+                    budget.setId(jsonObject.getInt("id"));
+                    budget.setId_cliente(jsonObject.getInt("id_cliente"));
+                    onBudgetConfirmClick(budget);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("tag", "onErrorResponse: " + error.getMessage());
+            }
+        });
+        queue.add(jsonArrayRequest);
+    }
+
+    private void onBudgetConfirmClick(ClientsBudget budget) {
+        Intent intent = new Intent(this, NewBudgetActivityIncrease.class);
+        intent.putExtra("id_budget", budget.getId());
+        intent.putExtra("id_client", budget.getId_cliente());
+        startActivity(intent);
     }
 
 
