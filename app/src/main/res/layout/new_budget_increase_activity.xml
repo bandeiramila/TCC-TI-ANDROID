@@ -28,13 +28,13 @@
         android:layout_marginTop="16dp"
         android:text="@string/text_client"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/textNameClient"
+        app:layout_constraintEnd_toStartOf="@+id/textNameClientNewBudgetIncrease"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
-        android:id="@+id/textNameClient"
+        android:id="@+id/textNameClientNewBudgetIncrease"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -54,13 +54,13 @@
         android:layout_marginTop="16dp"
         android:text="@string/text_cpf_cnpj"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/textClientCPF_CNPJ"
+        app:layout_constraintEnd_toStartOf="@+id/textClientCPF_CNPJNewBudgetIncrease"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textClient" />
 
     <TextView
-        android:id="@+id/textClientCPF_CNPJ"
+        android:id="@+id/textClientCPF_CNPJNewBudgetIncrease"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -70,7 +70,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textCPF_CNPJ"
-        app:layout_constraintTop_toBottomOf="@+id/textNameClient" />
+        app:layout_constraintTop_toBottomOf="@+id/textNameClientNewBudgetIncrease" />
 
     <Button
         android:id="@+id/button_read_barcode"
@@ -79,10 +79,11 @@
         android:layout_marginTop="16dp"
         android:text="@string/botao_codigo_barras"
         android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textClientCPF_CNPJ"
+        app:layout_constraintTop_toBottomOf="@+id/textClientCPF_CNPJNewBudgetIncrease"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <EditText
@@ -94,6 +95,7 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="text"
+        android:visibility="gone"
         android:hint="@string/input_bar_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"

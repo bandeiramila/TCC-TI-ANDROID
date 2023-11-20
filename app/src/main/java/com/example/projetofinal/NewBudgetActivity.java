@@ -35,13 +35,13 @@ public class NewBudgetActivity extends AppCompatActivity {
 
     List<Clients> clients;
     ArrayList<String> clientNames;
-    List<ClientsBudget> budgetClient;
     ClientsBudget budget;
     Clients client;
     EditText pfpj, empenho;
     Spinner spinner;
     Button btnSalvar;
     int idClient;
+    String clientRegister, nameClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +148,8 @@ public class NewBudgetActivity extends AppCompatActivity {
         Clients cliente = clients.get(position-1);
         String pj = cliente.getCpf_cnpj();
         idClient = cliente.getId();
+        clientRegister = pj;
+        nameClient = cliente.getNomeCliente();
         pfpj.setText(pj);
     }
 
@@ -173,7 +175,6 @@ public class NewBudgetActivity extends AppCompatActivity {
 
     private void getIdBudget(){
         String url = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/listaorcamentos.php?last_id=" + idClient;
-        budgetClient = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -184,7 +185,8 @@ public class NewBudgetActivity extends AppCompatActivity {
                     budget = new ClientsBudget();
                     budget.setId(jsonObject.getInt("id"));
                     budget.setId_cliente(jsonObject.getInt("id_cliente"));
-                    onBudgetConfirmClick(budget);
+
+                    onBudgetConfirmClick(budget.getId());
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -198,12 +200,41 @@ public class NewBudgetActivity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
     }
 
-    private void onBudgetConfirmClick(ClientsBudget budget) {
+    private void onBudgetConfirmClick(int id) {
+
         Intent intent = new Intent(this, NewBudgetActivityIncrease.class);
-        intent.putExtra("id_budget", budget.getId());
-        intent.putExtra("id_client", budget.getId_cliente());
+        intent.putExtra("id_budget", id);
+        intent.putExtra("id_client", idClient);
+        intent.putExtra("name_client", nameClient);
+        intent.putExtra("cpf_cnpj", clientRegister);
         startActivity(intent);
     }
+
+//    private void extractClient(int client_id) {
+//        clients = new ArrayList<>();
+//        String url = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/listaclientes.php?id=" + client_id;
+//        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+//
+//        JsonArrayRequest jsonArray = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+//            @Override
+//            public void onResponse(JSONArray response) {
+//                try {
+//                    JSONObject jsonObject = response.getJSONObject(0);
+//                    client = new Clients();
+//                    client.setId(jsonObject.getInt("id"));
+//                    client.setNomeCliente(jsonObject.getString("nome"));
+//                    client.setCpf_cnpj(jsonObject.getString("cpf_cnpj"));
+//                } catch (JSONException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.d("tag", "onErrorResponse: " + error.getMessage());
+//            }
+//        });
+//    }
 
 
 }
