@@ -1,6 +1,8 @@
 package com.example.projetofinal;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,18 +32,21 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewBudgetActivityIncrease extends AppCompatActivity {
+public class NewBudgetActivityIncrease extends AppCompatActivity implements AdapterProductsPerBudget.OnProductClickListener{
     int id_budget, id_client, id_product_selected;
-    String name_client, registerClient;
+    String name_client, registerClient, url_lista;
     List <Clients> client;
     Clients aClient;
     List <Products> products;
     Products product;
+    List<ProductsBudget> productsBudgets;
     ArrayList<String> productsName;
     TextView insertClientName, insertNacionalRegisterClient;
     Spinner spinner;
     Button btnInserir, btnLimpar;
     EditText inputQuant, inputValue;
+    RecyclerView recyclerView;
+    AdapterProductsPerBudget adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,9 @@ public class NewBudgetActivityIncrease extends AppCompatActivity {
         btnLimpar = (Button) findViewById(R.id.botao_limpar_new_budget_increase);
         inputQuant = (EditText) findViewById(R.id.input_product_quant_new_budget_increase);
         inputValue = (EditText) findViewById(R.id.input_product_value_new_budget_increase);
+        recyclerView = findViewById(R.id.products_in_budget_increase);
+        url_lista = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/listaprodutosorcamento.php?orderby=id&sentido=desc&id_orcamento=" + id_budget;
+        extractProductsBudget(url_lista);
     }
     @Override
     protected void onResume(){
@@ -186,6 +194,7 @@ public class NewBudgetActivityIncrease extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 Toast.makeText(context, "Produto cadastrado no orçamento", Toast.LENGTH_SHORT).show();
+                extractProductsBudget(url_lista);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -197,21 +206,47 @@ public class NewBudgetActivityIncrease extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
+    public void extractProductsBudget(String url) {
+        productsBudgets = new ArrayList<>();
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject productObject = response.getJSONObject(i);
+                        ProductsBudget budget = new ProductsBudget();
+                        budget.setId(productObject.getInt("id"));
+                        budget.setId_orcamento(productObject.getInt("id_orcamento"));
+                        budget.setId_produto(productObject.getInt("id_produto"));
+                        budget.setQuantidade(productObject.getInt("quantidade"));
+                        budget.setValor_unitario(productObject.getDouble("valor_unitario"));
+                        budget.setNome_produto(productObject.getString("nome_produto"));
+                        productsBudgets.add(budget);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                    showList(productsBudgets);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("tag", "onErrorResponse: " + error.getMessage());
+            }
+        });
+        queue.add(jsonArrayRequest);
+    }
 
+    private void showList(List<ProductsBudget> budgets) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        adapter = new AdapterProductsPerBudget(getApplicationContext(), budgets);
+        adapter.setOnProductClickListener(this);
+        recyclerView.setAdapter(adapter);
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Override
+    public void onProductClick(ProductsBudget product) {
+        Toast.makeText(this, "item", Toast.LENGTH_SHORT).show();
+    }
 }

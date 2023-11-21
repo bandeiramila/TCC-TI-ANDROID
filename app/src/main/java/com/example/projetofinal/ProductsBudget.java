@@ -8,6 +8,15 @@ public class ProductsBudget implements Serializable {
     int id_produto;
     int quantidade;
     double valor_unitario;
+    String nome_produto;
+
+    public String getNome_produto() {
+        return nome_produto;
+    }
+
+    public void setNome_produto(String nome_produto) {
+        this.nome_produto = nome_produto;
+    }
 
     public int getId() {
         return id;
