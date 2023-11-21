@@ -10,14 +10,6 @@ public class Products implements Serializable {
     private float price;
 
     public Products(){}
-    public Products(int id, String productName, String barCode, String quant, float price) {
-        this.id = id;
-        this.productName = productName;
-        this.barCode = barCode;
-        this.quant = quant;
-        this.price = price;
-    }
-
 
     public int getId() {
         return id;

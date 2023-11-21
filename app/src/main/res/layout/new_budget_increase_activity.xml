@@ -1,24 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_screen"
+    android:elevation="0dp"
     tools:context=".NewBudgetActivityIncrease">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="@null"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/textView2"
+        app:layout_constraintBottom_toTopOf="@id/title"
+        app:srcCompat="@drawable/book_colored_svg" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="casual"
+        android:text="@string/app_title"
+        android:textColor="@color/orange"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageView"
+        app:layout_constraintTop_toTopOf="@id/imageView" />
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="355dp"
-        android:layout_height="53dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/title_new_budget"
-        android:textSize="29sp"
+        android:textSize="20sp"
+        android:textColor="@color/orange"
+        android:fontFamily="serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/imageView" />
 
     <TextView
         android:id="@+id/textClient"
@@ -51,7 +84,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:text="@string/text_cpf_cnpj"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/textClientCPF_CNPJNewBudgetIncrease"
@@ -64,7 +96,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="@string/receive_cpf_cnpj"
         android:textSize="18sp"
@@ -102,44 +133,64 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_read_barcode" />
 
-    <Spinner
-        android:id="@+id/input_nome_produto"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
+    <RelativeLayout
+        android:id="@+id/layout_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_digitar_codigo" />
-
-    <Spinner
-        android:id="@+id/input_quantidade_produto"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@id/input_product_quant_new_budget_increase"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_nome_produto" />
+        app:layout_constraintTop_toBottomOf="@+id/input_digitar_codigo">
+        <Spinner
+            android:id="@+id/input_product_name_new_budget_increase"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/spinner_style"
+            />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/drop"
+            />
+    </RelativeLayout>
 
     <EditText
-        android:id="@+id/input_digitar_valor"
+        android:id="@+id/input_product_quant_new_budget_increase"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:hint="Quantidade"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@id/input_product_value_new_budget_increase"
+        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_spinner" />
+
+    <EditText
+        android:id="@+id/input_product_value_new_budget_increase"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="number|numberDecimal"
         android:hint="@string/input_valor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_quantidade_produto" />
+        app:layout_constraintStart_toEndOf="@id/input_product_quant_new_budget_increase"
+        app:layout_constraintTop_toTopOf="@+id/input_product_quant_new_budget_increase" />
 
     <TextView
         android:id="@+id/textValorTotal"
@@ -149,11 +200,11 @@
         android:layout_marginEnd="8dp"
         android:text="@string/text_total_cost"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/textValorTotalCalculo"
-        app:layout_constraintTop_toBottomOf="@+id/input_digitar_valor" />
+        app:layout_constraintEnd_toStartOf="@+id/text_total_cost_new_budget_increase"
+        app:layout_constraintTop_toBottomOf="@+id/input_product_value_new_budget_increase" />
 
     <TextView
-        android:id="@+id/textValorTotalCalculo"
+        android:id="@+id/text_total_cost_new_budget_increase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -161,47 +212,130 @@
         android:text="@string/receive_total_cost"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_digitar_valor" />
+        app:layout_constraintTop_toBottomOf="@+id/input_product_value_new_budget_increase" />
 
     <Button
-        android:id="@+id/botao_limpar"
-        android:layout_width="133dp"
+        android:id="@+id/botao_limpar_new_budget_increase"
+        style="@style/StyledButton"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/botao_limpar"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/botao_inserir"
+        android:textSize="12sp"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toStartOf="@id/botao_inserir_new_budget_increase"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textValorTotal"/>
 
     <Button
-        android:id="@+id/botao_inserir"
-        android:layout_width="133dp"
+        android:id="@+id/botao_inserir_new_budget_increase"
+        style="@style/StyledButton"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="@string/botao_inserir"
-        android:textSize="16sp"
+        android:textSize="12sp"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/botao_limpar"
+        app:layout_constraintStart_toEndOf="@+id/botao_limpar_new_budget_increase"
         app:layout_constraintTop_toBottomOf="@+id/textValorTotal" />
 
+<!--    <TextView-->
+<!--        android:id="@+id/itens_list"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:gravity="center_horizontal|center_vertical"-->
+<!--        android:text="@string/text_itens_list"-->
+<!--        android:textSize="24sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/botao_inserir_new_budget_increase" />-->
+
     <TextView
-        android:id="@+id/itens_list"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="@string/text_itens_list"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/quantProdTitle"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:text="QT"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:textColor="@android:color/tertiary_text_light"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/botao_inserir" />
+        app:layout_constraintBottom_toTopOf="@id/products_in_budget_increase"
+        app:layout_constraintTop_toBottomOf="@id/botao_inserir_new_budget_increase"
+        app:layout_constraintEnd_toStartOf="@id/nameProdTitle"
+        app:layout_constraintHorizontal_bias="0.0"/>
+
+    <TextView
+        android:id="@+id/nameProdTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:text="NOME DO PRODUTO"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/tertiary_text_light"
+        app:layout_constraintEnd_toStartOf="@id/priceProdTitle"
+        app:layout_constraintStart_toEndOf="@id/quantProdTitle"
+        app:layout_constraintBottom_toTopOf="@id/products_in_budget_increase"
+        app:layout_constraintTop_toBottomOf="@id/botao_inserir_new_budget_increase"
+        app:layout_constraintHorizontal_bias="0.0"/>
+
+    <TextView
+        android:id="@+id/priceProdTitle"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="V UN"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:textColor="@android:color/tertiary_text_light"
+        app:layout_constraintStart_toEndOf="@id/nameProdTitle"
+        app:layout_constraintBottom_toTopOf="@id/products_in_budget_increase"
+        app:layout_constraintTop_toBottomOf="@id/botao_inserir_new_budget_increase"
+        app:layout_constraintEnd_toStartOf="@id/totalPriceProdTitle"
+        app:layout_constraintHorizontal_bias="0.0"/>
+
+    <TextView
+        android:id="@+id/totalPriceProdTitle"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="10dp"
+        android:text="VT"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:textColor="@android:color/tertiary_text_light"
+        app:layout_constraintStart_toEndOf="@id/priceProdTitle"
+        app:layout_constraintBottom_toTopOf="@id/products_in_budget_increase"
+        app:layout_constraintTop_toBottomOf="@id/botao_inserir_new_budget_increase"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/products_in_budget_increase"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameProdTitle"
+        app:layout_constraintVertical_bias="0.5"
+        tools:itemCount="5"
+        tools:listitem="@layout/custom_list_product_budget" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

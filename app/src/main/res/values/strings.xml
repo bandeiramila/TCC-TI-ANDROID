@@ -50,7 +50,7 @@
     <string name="text_opcional">*Opcional</string>
     <string name="text_quantidade">Quantidade</string>
     <string name="text_telefone">Telefone</string>
-    <string name="text_total_cost">Valor Total: </string>
+    <string name="text_total_cost">Total Orçado: </string>
 
     <string name="receive_client">Nome cliente</string>
     <string name="receive_cpf_cnpj">Cadastro cliente</string>
