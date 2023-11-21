@@ -210,31 +210,4 @@ public class NewBudgetActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    private void extractClient(int client_id) {
-//        clients = new ArrayList<>();
-//        String url = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/listaclientes.php?id=" + client_id;
-//        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-//
-//        JsonArrayRequest jsonArray = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-//            @Override
-//            public void onResponse(JSONArray response) {
-//                try {
-//                    JSONObject jsonObject = response.getJSONObject(0);
-//                    client = new Clients();
-//                    client.setId(jsonObject.getInt("id"));
-//                    client.setNomeCliente(jsonObject.getString("nome"));
-//                    client.setCpf_cnpj(jsonObject.getString("cpf_cnpj"));
-//                } catch (JSONException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.d("tag", "onErrorResponse: " + error.getMessage());
-//            }
-//        });
-//    }
-
-
 }
