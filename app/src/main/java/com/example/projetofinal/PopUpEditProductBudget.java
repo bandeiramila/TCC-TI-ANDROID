@@ -1,47 +1,56 @@
 package com.example.projetofinal;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PopUpEditProductBudget#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class PopUpEditProductBudget extends Fragment {
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+import java.io.Serializable;
+import java.util.jar.JarException;
 
-    public PopUpEditProductBudget() {
-        // Required empty public constructor
+public class PopUpEditProductBudget extends DialogFragment {
+
+    private static final String ITEM = "item";
+    ProductsBudget productsBudget;
+    private OnProductEditedListener listener;
+
+    public PopUpEditProductBudget() {}
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof OnProductEditedListener) {
+            listener = (OnProductEditedListener) context;
+        } else {
+            throw new ClassCastException();
+        }
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PopUpEditProductBudget.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PopUpEditProductBudget newInstance(String param1, String param2) {
+    public static PopUpEditProductBudget newInstance(ProductsBudget productsBudget) {
         PopUpEditProductBudget fragment = new PopUpEditProductBudget();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ITEM, (Serializable) productsBudget);
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,16 +58,83 @@ public class PopUpEditProductBudget extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle args = getArguments();
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            productsBudget = (ProductsBudget) args.getSerializable(ITEM);
         }
+        setCancelable(false);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_pop_up_edit_product_budget, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle bundle) {
+        super.onViewCreated(view, bundle);
+        Button btnCancelar = view.findViewById(R.id.popup_botao_cancelar_produto_popup);
+        Button btnEnviar = view.findViewById(R.id.popup_botao_enviar_produto_popup);
+        TextView nome = view.findViewById(R.id.edita_produto_nome_popup);
+        EditText quantidade = view.findViewById(R.id.input_digita_quantidade_popup);
+        EditText valor = view.findViewById(R.id.input_digita_valor_produto_popup);
+
+        String recebeNome = productsBudget.getNome_produto();
+        String textoNome = "Produto: " + recebeNome;
+        String textoQuantidade = String.valueOf(productsBudget.getQuantidade());
+        String textoPreco = String.valueOf(productsBudget.getValor_unitario());
+
+        nome.setText(textoNome);
+        quantidade.setText(textoQuantidade);
+        valor.setText(textoPreco);
+
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {dismiss();}
+        });
+
+        btnEnviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int novaQuantidade = Integer.parseInt(quantidade.getText().toString());
+                double novoValor = Double.parseDouble(valor.getText().toString());
+
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("id", productsBudget.getId());
+                    jsonObject.put("quantidade", novaQuantidade);
+                    jsonObject.put("valor", novoValor);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                editaDados(getContext(), jsonObject);
+            }
+        });
+    }
+
+    private void editaDados(Context context, JSONObject jsonObject) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/editapo.php";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                listener.onEditSuccess();
+                Toast.makeText(context, "Produto editado com sucesso!", Toast.LENGTH_SHORT).show();
+                dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Erro ao editar produto!", Toast.LENGTH_SHORT).show();
+                dismiss();
+            }
+        });
+        queue.add(jsonObjectRequest);
+    }
+
+    public interface OnProductEditedListener {
+        void onEditSuccess();
     }
 }

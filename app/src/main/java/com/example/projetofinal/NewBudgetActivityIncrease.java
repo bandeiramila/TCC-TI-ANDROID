@@ -32,21 +32,21 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewBudgetActivityIncrease extends AppCompatActivity implements AdapterProductsPerBudget.OnProductClickListener, PopUpProductBudget.OnButtonClickListener{
+public class NewBudgetActivityIncrease extends AppCompatActivity implements AdapterProductsPerBudget.OnProductClickListener, PopUpProductBudget.OnButtonClickListener, PopUpEditProductBudget.OnProductEditedListener{
     int id_budget, id_client, id_product_selected;
     String name_client, registerClient, url_lista;
-    List <Clients> client;
-    Clients aClient;
     List <Products> products;
     Products product;
     List<ProductsBudget> productsBudgets;
     ArrayList<String> productsName;
-    TextView insertClientName, insertNacionalRegisterClient;
+    TextView insertClientName, insertNacionalRegisterClient, insertTotalCost;
     Spinner spinner;
     Button btnInserir, btnLimpar;
     EditText inputQuant, inputValue;
     RecyclerView recyclerView;
     AdapterProductsPerBudget adapter;
+    Boolean askRefresh = false;
+    Double totalBudget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class NewBudgetActivityIncrease extends AppCompatActivity implements Adap
         registerClient =getIntent().getStringExtra("cpf_cnpj");
         insertClientName = (TextView) findViewById(R.id.textNameClientNewBudgetIncrease);
         insertNacionalRegisterClient = (TextView) findViewById(R.id.textClientCPF_CNPJNewBudgetIncrease);
+        insertTotalCost = (TextView) findViewById(R.id.text_total_cost_new_budget_increase);
         insertClientName.setText(name_client);
         insertNacionalRegisterClient.setText(registerClient);
         btnInserir = (Button) findViewById(R.id.botao_inserir_new_budget_increase);
@@ -66,7 +67,7 @@ public class NewBudgetActivityIncrease extends AppCompatActivity implements Adap
         inputValue = (EditText) findViewById(R.id.input_product_value_new_budget_increase);
         recyclerView = findViewById(R.id.products_in_budget_increase);
         url_lista = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/listaprodutosorcamento.php?orderby=id&sentido=desc&id_orcamento=" + id_budget;
-        extractProductsBudget(url_lista);
+        extractProductsBudget(url_lista, false);
     }
     @Override
     protected void onResume(){
@@ -194,7 +195,7 @@ public class NewBudgetActivityIncrease extends AppCompatActivity implements Adap
             @Override
             public void onResponse(JSONObject response) {
                 Toast.makeText(context, "Produto cadastrado no orçamento", Toast.LENGTH_SHORT).show();
-                extractProductsBudget(url_lista);
+                extractProductsBudget(url_lista, false);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -206,7 +207,8 @@ public class NewBudgetActivityIncrease extends AppCompatActivity implements Adap
         queue.add(jsonObjectRequest);
     }
 
-    public void extractProductsBudget(String url) {
+    public void extractProductsBudget(String url, boolean askRefresh) {
+        totalBudget = 0.0;
         productsBudgets = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -223,10 +225,19 @@ public class NewBudgetActivityIncrease extends AppCompatActivity implements Adap
                         budget.setValor_unitario(productObject.getDouble("valor_unitario"));
                         budget.setNome_produto(productObject.getString("nome_produto"));
                         productsBudgets.add(budget);
+                        //// CALCULAR TOTAL DO ORÇAMENTO ////
+                        double valortotal = budget.getValor_unitario() * budget.getQuantidade();
+                        totalBudget = totalBudget + valortotal;
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
-                    showList(productsBudgets);
+                    if (!askRefresh) {
+                        showList(productsBudgets);
+                    } else {
+                        refreshList(productsBudgets);
+                    }
+                    String total = String.format("R$ %1$.2f", totalBudget);
+                    insertTotalCost.setText(total);
                 }
             }
         }, new Response.ErrorListener() {
@@ -245,6 +256,11 @@ public class NewBudgetActivityIncrease extends AppCompatActivity implements Adap
         recyclerView.setAdapter(adapter);
     }
 
+    private void refreshList(List<ProductsBudget> productsBudgets) {
+        adapter.products = productsBudgets;
+        adapter.notifyDataSetChanged();
+    }
+
     @Override
     public void onProductClick(ProductsBudget product) {showAlertDialog(product);}
     public void showAlertDialog(ProductsBudget productsBudget) {
@@ -253,12 +269,22 @@ public class NewBudgetActivityIncrease extends AppCompatActivity implements Adap
         popUpProductBudget.show(getSupportFragmentManager(), "PopUpProductBudget");
     }
 
-    @Override
-    public void onEditClick(ProductsBudget productsBudget) {
+    public void showAlertDialogEdit(ProductsBudget productsBudget) {
+        PopUpEditProductBudget popUpEditProductBudget = PopUpEditProductBudget.newInstance(productsBudget);
+        getSupportFragmentManager().beginTransaction().commit();
+        popUpEditProductBudget.show(getSupportFragmentManager(), "PopUpEditProductBudget");
     }
 
     @Override
-    public void onDeleteClick() {
+    public void onEditClick(ProductsBudget productsBudget) { showAlertDialogEdit(productsBudget);}
 
+    @Override
+    public void onDeleteClick() {
+        onEditSuccess();
+    }
+
+    @Override
+    public void onEditSuccess() {
+        extractProductsBudget(url_lista, true);
     }
 }

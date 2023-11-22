@@ -20,229 +20,75 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/edita_cliente_nome_popup"/>
+        app:layout_constraintBottom_toTopOf="@id/edita_produto_nome_popup"/>
 
     <!-- ************* NOME **************-->
     <TextView
-        android:id="@+id/edita_cliente_nome_popup"
+        android:id="@+id/edita_produto_nome_popup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_nome_cliente"
-        android:textSize="11sp"
+        android:text="Nome do Produto"
+        android:textSize="13sp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tituloPopUpEditar" />
 
-    <EditText
-        android:id="@+id/input_nome_cliente_popup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/input_nome"
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/edita_cliente_nome_popup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:inputType="textCapSentences|textAutoCorrect"
-        android:imeOptions="actionNext"/>
-
-    <!-- ************* CPF/CNPJ **************-->
+    <!-- ************* QUANTIDADE **************-->
     <TextView
-        android:id="@+id/edita_cliente_pfpj_popup"
+        android:id="@+id/edita_produto_quantidade_popup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_cpf_cnpj"
+        android:text="@string/text_quantidade"
         android:textSize="11sp"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@id/input_nome_cliente_popup"
+        app:layout_constraintTop_toBottomOf="@id/edita_produto_nome_popup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <EditText
-        android:id="@+id/input_digita_pfpj_popup"
+        android:id="@+id/input_digita_quantidade_popup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/input_cpf_cnpj"
+        android:hint="@string/text_quantidade"
         android:textSize="14sp"
         android:inputType="number"
         android:digits="0123456789"
-        app:layout_constraintTop_toBottomOf="@id/edita_cliente_pfpj_popup"
+        app:layout_constraintTop_toBottomOf="@id/edita_produto_quantidade_popup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:imeOptions="actionNext"/>
 
-    <!-- ************* TELEFONE **************-->
+    <!-- ************* VALOR **************-->
     <TextView
-        android:id="@+id/edita_cliente_telefone_popup"
+        android:id="@+id/edita_produto_valor_popup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_telefone"
+        android:text="@string/input_valor"
         android:textSize="11sp"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@id/input_digita_pfpj_popup"
+        app:layout_constraintTop_toBottomOf="@id/input_digita_quantidade_popup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <EditText
-        android:id="@+id/input_digita_telefone_popup"
+        android:id="@+id/input_digita_valor_produto_popup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:digits="0123456789"
+        android:inputType="number|numberDecimal"
+        android:hint="@string/input_valor"
+        android:digits="0123456789."
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edita_cliente_telefone_popup"
-        android:imeOptions="actionNext"/>
-
-    <!-- ************* EMAIL **************-->
-    <TextView
-        android:id="@+id/edita_cliente_email_popup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_email"
-        android:textSize="11sp"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@id/input_digita_telefone_popup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <EditText
-        android:id="@+id/input_digita_email_popup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_email"
-        android:textSize="14sp"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edita_cliente_email_popup" />
-
-    <!-- ************* CEP **************-->
-    <TextView
-        android:id="@+id/edita_cliente_cep_popup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_cep"
-        android:textSize="11sp"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@id/input_digita_email_popup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <EditText
-        android:id="@+id/input_digita_cep_popup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_cep"
-        android:textSize="14sp"
-        android:inputType="number"
-        android:digits="1234567890"
-        app:layout_constraintEnd_toStartOf="@id/input_digita_cidade_popup"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edita_cliente_cep_popup"
-        android:imeOptions="actionNext"/>
-
-    <!-- ************* CIDADE **************-->
-    <TextView
-        android:id="@+id/edita_cliente_cidade_popup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_cidade"
-        android:textSize="11sp"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@id/input_digita_email_popup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/input_digita_cidade_popup"
-        app:layout_constraintStart_toStartOf="@id/input_digita_cidade_popup"/>
-
-    <EditText
-        android:id="@+id/input_digita_cidade_popup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_cidade"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/input_digita_cep_popup"
-        app:layout_constraintTop_toBottomOf="@id/edita_cliente_cep_popup"
-        android:inputType="textCapSentences|textAutoCorrect" />
-
-    <!-- ************* LOGRADOURO **************-->
-    <TextView
-        android:id="@+id/edita_cliente_logradouro_popup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_logradouro"
-        android:textSize="11sp"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@id/input_digita_cep_popup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <EditText
-        android:id="@+id/input_digita_logradouro_popup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_logradouro"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edita_cliente_logradouro_popup"
-        android:inputType="textCapSentences|textAutoCorrect" />
-
-    <!-- ************* BAIRRO **************-->
-    <TextView
-        android:id="@+id/edita_cliente_bairro_popup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_bairro"
-        android:textSize="11sp"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@id/input_digita_logradouro_popup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <EditText
-        android:id="@+id/input_digita_bairro_popup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_bairro"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@id/input_digita_numero_popup"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edita_cliente_bairro_popup"
-        android:inputType="textCapSentences|textAutoCorrect"
-        android:imeOptions="actionNext"/>
-
-    <!-- ************* NUMERO **************-->
-    <TextView
-        android:id="@+id/edita_cliente_numero_popup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_numero"
-        android:textSize="11sp"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@id/input_digita_logradouro_popup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/input_digita_numero_popup"/>
-
-    <EditText
-        android:id="@+id/input_digita_numero_popup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_numero"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/input_digita_bairro_popup"
-        app:layout_constraintTop_toBottomOf="@id/edita_cliente_numero_popup"
-        android:inputType="textCapSentences|number"
-        android:imeOptions="actionSend"/>
+        app:layout_constraintTop_toBottomOf="@id/edita_produto_valor_popup"
+        />
 
     <!-- ************* BOTÕES **************-->
 
     <Button
-        android:id="@+id/popup_botao_enviar_cliente_popup"
+        android:id="@+id/popup_botao_enviar_produto_popup"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -251,11 +97,11 @@
         style="@style/StyledButton"
         app:backgroundTint="@null"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_digita_bairro_popup"
-        app:layout_constraintEnd_toStartOf="@id/popup_botao_cancelar_cliente_popup"/>
+        app:layout_constraintTop_toBottomOf="@id/input_digita_valor_produto_popup"
+        app:layout_constraintEnd_toStartOf="@id/popup_botao_cancelar_produto_popup"/>
 
     <Button
-        android:id="@+id/popup_botao_cancelar_cliente_popup"
+        android:id="@+id/popup_botao_cancelar_produto_popup"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -264,8 +110,8 @@
         style="@style/StyledButton"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/popup_botao_enviar_cliente_popup"
-        app:layout_constraintTop_toBottomOf="@id/input_digita_bairro_popup" />
+        app:layout_constraintStart_toEndOf="@+id/popup_botao_enviar_produto_popup"
+        app:layout_constraintTop_toBottomOf="@id/input_digita_valor_produto_popup" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
