@@ -45,7 +45,6 @@ public class NewBudgetActivityIncrease extends AppCompatActivity implements Adap
     EditText inputQuant, inputValue;
     RecyclerView recyclerView;
     AdapterProductsPerBudget adapter;
-    Boolean askRefresh = false;
     Double totalBudget;
 
     @Override
