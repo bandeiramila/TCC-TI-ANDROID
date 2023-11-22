@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Locale;
 public class BudgetsPerClientList extends AppCompatActivity implements AdapterBudgetsPerClient.OnBudgetClickListener{
     private int id;
-    private String nome;
+    private String nome, cpf_cnpj;
     RecyclerView recyclerView;
     List<ClientsBudget> budgets;
     private static final String URL_ORC = "http://" + Conexao.IP + "/mvc_sistema_livraria/view/listaorcamentos.php?orderby=data_solicitacao&sentido=desc&cliente=";
@@ -51,6 +51,7 @@ public class BudgetsPerClientList extends AppCompatActivity implements AdapterBu
         setContentView(R.layout.activity_budgets_per_client_list);
         id = getIntent().getIntExtra("id_client",0);
         nome = getIntent().getStringExtra("name_client");
+        cpf_cnpj = getIntent().getStringExtra("cnpj_client");
         recyclerView = findViewById(R.id.budgetsPerClientList);
         titulo = (TextView) findViewById(R.id.title_budgets_per_client_list);
         texto = "Orçamentos de: " + nome;
@@ -109,7 +110,23 @@ public class BudgetsPerClientList extends AppCompatActivity implements AdapterBu
 
     @Override
     public void onBudgetClick(ClientsBudget budget) {
-        Toast.makeText(this,"item", Toast.LENGTH_SHORT).show();
+        openProductsBudget(budget);
+    }
+
+    public void openProductsBudget(ClientsBudget budget) {
+        int id = budget.getId();
+        String nome_cliente = nome;
+        String cadastro = cpf_cnpj;
+        String empenho = budget.getEmpenho();
+        String data = budget.getData_solicitacao();
+
+        Intent intent = new Intent(this, OpenBudget.class);
+        intent.putExtra("id_orcamento", id);
+        intent.putExtra("nome", nome_cliente);
+        intent.putExtra("cadastro", cadastro);
+        intent.putExtra("empenho", empenho);
+        intent.putExtra("data", data);
+        startActivity(intent);
     }
 
 

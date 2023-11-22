@@ -130,6 +130,7 @@ public class BudgetClientsList extends AppCompatActivity implements AdapterClien
                         Clients client = new Clients();
                         client.setId(clientObject.getInt("id"));
                         client.setNomeCliente(clientObject.getString("nome"));
+                        client.setCpf_cnpj(clientObject.getString("cpf_cnpj"));
                         clients.add(client);
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
@@ -160,6 +161,7 @@ public class BudgetClientsList extends AppCompatActivity implements AdapterClien
         Intent intent = new Intent(this, BudgetsPerClientList.class);
         intent.putExtra("id_client", clients.getId());
         intent.putExtra("name_client", clients.getNomeCliente());
+        intent.putExtra("cnpj_client", clients.getCpf_cnpj());
         startActivity(intent);
     }
 
