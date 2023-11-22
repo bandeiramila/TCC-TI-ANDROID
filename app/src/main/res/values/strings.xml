@@ -60,6 +60,8 @@
     <string name="text_adicionar_orcamento">Adicionar Orçamento</string>
     <string name="title_new_client">Cadastrar Novo Cliente</string>
     <string name="app_title">LUCINDA LIVROS</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

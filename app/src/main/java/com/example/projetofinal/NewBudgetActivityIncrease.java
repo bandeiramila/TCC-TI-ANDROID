@@ -32,7 +32,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewBudgetActivityIncrease extends AppCompatActivity implements AdapterProductsPerBudget.OnProductClickListener{
+public class NewBudgetActivityIncrease extends AppCompatActivity implements AdapterProductsPerBudget.OnProductClickListener, PopUpProductBudget.OnButtonClickListener{
     int id_budget, id_client, id_product_selected;
     String name_client, registerClient, url_lista;
     List <Clients> client;
@@ -246,7 +246,19 @@ public class NewBudgetActivityIncrease extends AppCompatActivity implements Adap
     }
 
     @Override
-    public void onProductClick(ProductsBudget product) {
-        Toast.makeText(this, "item", Toast.LENGTH_SHORT).show();
+    public void onProductClick(ProductsBudget product) {showAlertDialog(product);}
+    public void showAlertDialog(ProductsBudget productsBudget) {
+        PopUpProductBudget popUpProductBudget = PopUpProductBudget.newInstance(productsBudget);
+        getSupportFragmentManager().beginTransaction().commit();
+        popUpProductBudget.show(getSupportFragmentManager(), "PopUpProductBudget");
+    }
+
+    @Override
+    public void onEditClick(ProductsBudget productsBudget) {
+    }
+
+    @Override
+    public void onDeleteClick() {
+
     }
 }
