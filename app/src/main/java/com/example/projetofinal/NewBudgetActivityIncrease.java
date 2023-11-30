@@ -184,6 +184,7 @@ public class NewBudgetActivityIncrease extends AppCompatActivity implements Adap
     private void onProductSelected(int position) {
         Products products1 = products.get(position-1);
         id_product_selected = products1.getId();
+        inputValue.setText(String.valueOf(products1.getPrice()));
     }
 
     private void cadastraProduto(Context context, JSONObject jsonObject) {
