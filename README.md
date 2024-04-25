@@ -10,6 +10,8 @@ Este é um aplicativo Android desenvolvido para a Lucinda Livros, uma livraria f
 - **Postman (teste de requisições)**
 - **DBeaver (modelagem de DB)**
 
+Os serviços utilizados pelo aplicativo estão alocados [neste repositório](https://github.com/bandeiramila/MVC-SISTEMA-LIVRARIA).
+
 ## Funcionalidades:
 - Cadastro e gestão de produtos
 - Cadastro e gestão de clientes
