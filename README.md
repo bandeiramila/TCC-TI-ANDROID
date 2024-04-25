@@ -5,12 +5,14 @@ Este é um aplicativo Android desenvolvido para a Lucinda Livros, uma livraria f
 ## Tecnologias Utilizadas:
 - **Java**
 - **Android Studio**
-- **SQL**
+- **SQL (MySQL)**
+- **PHP (utilizado nas APIs)**
+- **Postman (teste de requisições)**
+- **DBeaver (modelagem de DB)**
 
 ## Funcionalidades:
 - Cadastro e gestão de produtos
 - Cadastro e gestão de clientes
-- Orçamentos e vendas
-- Interface intuitiva para facilitar a operação
+- Listagem de Orçamentos e vendas
 
 O aplicativo visa melhorar a eficiência operacional da livraria, oferecendo uma maneira simples e eficaz de gerenciar o estoque e as vendas.
